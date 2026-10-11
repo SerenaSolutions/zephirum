@@ -2,7 +2,7 @@
 
 *Documento documental para auditoria técnica independente. Toda a sintaxe da linguagem e os algoritmos, com trilha de evidência verificável.*
 
-![Logo ZYQL](../assets/brand/logo_zyql_betta_v5_ciano.png)
+![Logo ZYQL](../assets/brand/logo_zyql_betta_oficial_11out2026.jpg)
 
 **ZEPHIRUM/ZYQL** — o sistema tem duas camadas com papéis distintos e auditáveis:
 
