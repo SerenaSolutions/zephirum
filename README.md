@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/IBM%20Quantum-validated-563D7C" alt="Validated on IBM Quantum hardware">
 </p>
 
-<p align="center"><img src="assets/brand/logo_zyql_main.png" width="480" alt="ZEPHIRUM — ZYQL: the official language emblem, the Z made of 0 and 1"></p>
+<p align="center"><img src="assets/brand/logo_zyql_betta_v5_ciano.png" width="480" alt="ZYQL — emblema oficial: o peixe betta ascensional em azul ciano vivo fosforescente, na diagonal, antes do wordmark ZYQL"></p>
 
 <p align="center">
   <a href="assets/demos/zyql_vscode_demo.mp4"><img src="assets/demos/zyql_vscode_demo.gif" width="820" alt="ZYQL running in a VS Code workspace (20 s demo, click for MP4)"></a>
