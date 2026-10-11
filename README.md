@@ -1,11 +1,11 @@
+<p align="center"><img src="assets/brand/logo_zyql_betta_v5_ciano.png" width="480" alt="ZYQL — emblema oficial: o peixe betta ascensional em azul ciano vivo fosforescente, na diagonal, antes do wordmark ZYQL"></p>
+
 <p align="center">
   <a href="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml"><img src="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/version-v0.9.0-steelblue" alt="Version v0.8.2">
   <img src="https://img.shields.io/badge/IBM%20Quantum-validated-563D7C" alt="Validated on IBM Quantum hardware">
 </p>
-
-<p align="center"><img src="assets/brand/logo_zyql_betta_v5_ciano.png" width="480" alt="ZYQL — emblema oficial: o peixe betta ascensional em azul ciano vivo fosforescente, na diagonal, antes do wordmark ZYQL"></p>
 
 <p align="center">
   <a href="assets/demos/zyql_vscode_demo.mp4"><img src="assets/demos/zyql_vscode_demo.gif" width="820" alt="ZYQL running in a VS Code workspace (20 s demo, click for MP4)"></a>
