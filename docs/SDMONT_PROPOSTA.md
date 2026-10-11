@@ -60,11 +60,9 @@ Certificação exata de estados quânticos em escala: eliminação de
 computação com aritmética racional verificável no SDumont
 
 ### Proponente
-Leonardo Henrique dos Anjos [dados completos a preencher no ato]
-Perfil: pesquisador independente; formação em Engenharia de Software /
-Análise de Sistemas (Anhanguera, até o 2º semestre, carteirinha
-estudantil em vigor); autor do núcleo ZEPHIRUM com validação publicada
-em QPU real da IBM.
+Serena Solutions Zéfir [dados completos a preencher no ato]
+Perfil: casa de pesquisa e desenvolvimento independente; autora do
+núcleo ZEPHIRUM com validação publicada em QPU real da IBM.
 
 ### Resumo
 O projeto ZEPHIRUM (marca em registro INPI) implementa um núcleo de
