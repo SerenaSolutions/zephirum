@@ -30,10 +30,10 @@ história.
 
 | # | Fundador(a) | Data | Primeira pergunta (hash) |
 |---|---|---|---|
-| 000 | Leonardo Henrique dos Anjos | 2026-10-07 | A série de Gauss — a primeira pergunta que a linguagem decidiu por si (bootstrap B1) |
+| 000 | Serena Solutions Zéfir | 2026-10-07 | A série de Gauss — a primeira pergunta que a linguagem decidiu por si (bootstrap B1) |
 
-*Usuário 000 é o autor. A linguagem foi construída por Leonardo
-com seu agente de IA — o instrumento, não o autor: cada commit tem
+*Usuário 000 é a casa. A linguagem foi construída pela Serena
+Solutions Zéfir com seu agente de IA — o instrumento, não o autor: cada commit tem
 dono humano, cada decisão técnica tem direção humana.*
 
 Os próximos 100 nomes serão inscritos aqui, em ordem de chegada.
