@@ -1,3 +1,15 @@
+## [0.9.1] — 2026-10-11
+
+### Brand & public hygiene
+- README: `IBM Quantum` badge replaced by the neutral **QUANTUM HARDWARE BRIDGE — validated** badge (CEO directive: no vendor names in public pieces).
+- README: hardware-validation section retitled "real QPU via the QUANTUM HARDWARE BRIDGE"; test lab remains cited only inside the receipt files, where it belongs.
+- FOUNDERS.md: vendor mention removed from the founder's-proof line.
+- Fixed stale version alt text (v0.8.2 → v0.9.0).
+
+### Added
+- `assets/ebook_launch_v2.pdf` — 17-page LinkedIn-standard launch ebook (1080x1350, mobile-first, vendor-neutral, OCR-audited).
+- `assets/brand/launch_poster_neutral.jpg` — launch poster with vendor footer removed ("real quantum hardware").
+
 # Changelog
 
 All notable releases of ZEPHIRUM (ZEPHIRUM/ZYQL). Soundness first: a wrong

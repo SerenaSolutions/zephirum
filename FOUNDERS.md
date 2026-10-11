@@ -11,7 +11,7 @@ primeira pergunta que fizeram à linguagem.
 
 Cada fundador recebe o *certificado de fundação*: um certificado
 ZEPHIRUM real, emitido pela própria linguagem, decidindo a primeira
-pergunta do fundador — a mesma prova que a IBM testemunhou.
+pergunta do fundador — a mesma prova que hardware quântico real testemunhou.
 
 ## Como entrar (evidência, não promessa)
 

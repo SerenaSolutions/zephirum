@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml"><img src="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/version-v0.9.0-steelblue" alt="Version v0.8.2">
-  <img src="https://img.shields.io/badge/IBM%20Quantum-validated-563D7C" alt="Validated on IBM Quantum hardware">
+  <img src="https://img.shields.io/badge/version-v0.9.0-steelblue" alt="Version v0.9.0">
+  <img src="https://img.shields.io/badge/QUANTUM%20HARDWARE%20BRIDGE-validated-563D7C" alt="Validated on real QPU hardware via the Quantum Hardware Bridge">
 </p>
 
 <p align="center">
@@ -43,10 +43,10 @@ The paradigm inverts: from `ALGORITHM → COMPUTE` to `PROOF → COMPUTE`.
 | Honest UNKNOWNs (no guessing) | 31,418 (6.3%) |
 | Advisory AI layer | 95.67% accuracy vs 53.05% baseline |
 
-## Hardware validation (IBM Quantum, real QPU)
+## Hardware validation (real QPU via the QUANTUM HARDWARE BRIDGE)
 
 The exact classical core never consults the QPU for its verdict. Cloud runs
-are empirical evidence only (§12). Both experiments ran on ibm_fez (Heron,
+are empirical evidence only (§12). Both experiments ran on a 156-qubit-class
 156 qubits), free Open Plan, each under 1 second of QPU time:
 
 | Experiment | Exact C verdict (decided without execution) | QPU evidence |
@@ -56,7 +56,7 @@ are empirical evidence only (§12). Both experiments ran on ibm_fez (Heron,
 
 A product state cannot show both correlations near 1; a Bell state cannot
 show both near 0. The hardware agrees with the exact decision in both
-directions. Receipts: `results/bell_phi_plus_ibm_fez.json`, `results/ghz3_fusion_ibm_fez.json`, `results/ghz_n_ladder_ibm_fez.json`, `results/ghz20_sparse_ibm_fez.json`,
+directions. The test lab is cited in the receipt files themselves. Receipts: `results/bell_phi_plus_ibm_fez.json`, `results/ghz3_fusion_ibm_fez.json`, `results/ghz_n_ladder_ibm_fez.json`, `results/ghz20_sparse_ibm_fez.json`,
 `results/separable_control_ibm_fez.json`; full QPU usage ledger:
 `results/qpu_ledger.md`.
 
