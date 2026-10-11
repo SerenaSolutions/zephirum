@@ -6,7 +6,8 @@ Direcao do dono: "criptografia quantica de protecao pra ele mesmo"
 
 Camadas entregues (verificaveis, cada uma com recibo):
   1. ASSINATURA HASH-BASED (Lamport 1979, 64 bits de cobertura):
-     a familia que o NIST padronizou como SPHINCS+ (FIPS 205) —
+     mesma familia de IDEIAS que o NIST padronizou como SPHINCS+
+     (FIPS 205), mas NAO e uma implementacao FIPS 205 —
      seguranca fundada em SHA-256, sem confianca em fatoracao ou
      log discreto (o que a maquina de Shor quebraria). O CERT_HASH
      e assinado; a chave publica VIAJA no certificado.
@@ -98,14 +99,15 @@ def pq_protect(cert):
     sig = sign(ch, seed)
     pk = keypair(seed)
     cert["PQ_PROTECT"] = {
-        "ALGORITHM": "LAMPORT-OTS-SHA256-64 (familia FIPS 205)",
+        "ALGORITHM": "LAMPORT-OTS-SHA256-64 (hash-based, Lamport 1979; NOT FIPS 205 SLH-DSA - see PQ_NOTE)",
         "PK": pk,
         "SIG": sig,
         "PACKAGE_SEAL": self_seal()["seal"],
         "DECLARATION": "assinatura pos-quantica hash-based; QKD real "
-                       "exige hardware (S12); seguranca plena = "
-                       "FIPS 205 auditado — isto e o selo "
-                       "self-contained verificavel",
+                       "exige hardware (S12); seguranca plena de "
+                       "assinatura exige FIPS 205/204 auditado — isto "
+                       "e o selo hash-based Lamport self-contained, "
+                       "NAO uma implementacao FIPS 205",
     }
     return cert
 
@@ -118,4 +120,4 @@ def pq_verify(cert):
     ch = bytes.fromhex(cert["CERT_HASH"])
     if not verify(ch, pq["SIG"], pq["PK"]):
         return False, "assinatura Lamport NAO confere (adulteracao)"
-    return True, "post-quantum Lamport seal matches (FIPS 205 family)"
+    return True, "post-quantum Lamport seal matches (hash-based OTS; not a FIPS 205 implementation)"

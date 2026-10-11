@@ -2,7 +2,7 @@
 
 > **Brand:** ZEPHIRUM · the language is the **Zephirum Query Language — ZYQL** (say **"Zykel"**).
 
-The **Zephirum algorithm** plugin for the quantum world — v0.5.1: THE
+The **Zephirum algorithm** plugin for the quantum world — v0.6.0: THE
 DECISION IS ZEPHIRUM BYTECODE (Python is only the emitter/interpreter;
 the zvm C runtime contains no Python) — born from the house's first
 artifact (the autonomous verifier transpiled to Python/C/Java):
@@ -53,7 +53,8 @@ receipt, ok = gateway(open("examples/separable.zeph").read(),
 
 ## PQ-PROTECT (post-quantum self-protection)
 
-Hash-based Lamport signature (FIPS 205 family) on the certificate,
+Hash-based Lamport one-time signature (Lamport 1979; not a FIPS 205
+implementation) on the certificate,
 SHA-256 self-integrity seal of the plugin's own files, pure
 encapsulated core (no network/I/O/process) — verified in battery 20
 with active blockades and tampering caught in TWO independent layers.
@@ -69,3 +70,14 @@ with active blockades and tampering caught in TWO independent layers.
 5. The certificate is INDEPENDENTLY verifiable: `verify()`
    re-derives the decision and checks the seal — tampering is caught
    by CERT_HASH.
+
+## Honest scope notes (audit 2026-10-09)
+
+- The built-in PQ-PROTECT seal is a **Lamport one-time signature over SHA-256 (hash-based)**.
+  It is in the same *family* of ideas as NIST's SLH-DSA (FIPS 205) but is **not** a
+  FIPS 205 implementation. For FIPS 204 (ML-DSA-44) receipts see the main repo
+  (`prototype/pq_receipt.py`).
+- Decision scope: entanglement of **2-qubit pure states**, exact rational arithmetic
+  (closed Schmidt criterion). Anything outside scope is refused, never guessed.
+- Qiskit/Cirq extras are optional adversarial twins; a missing SDK is a declared SKIP.
+- Simulation/analytic only: no QPU is used or required.

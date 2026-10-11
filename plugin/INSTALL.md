@@ -18,7 +18,7 @@ Wheel alternative (no git):
 
 ```
 pkg install python -y
-pip install zephirum_quantum_plugin-0.3.0-py3-none-any.whl
+pip install zephirum_quantum_plugin-0.6.0-py3-none-any.whl
 ```
 
 §12 note: the `[qiskit]`/`[cirq]` extras depend on numpy — on Termux
@@ -33,14 +33,14 @@ py -m pip install git+https://github.com/SerenaSolutions/zephirum.git@main#subdi
 zephirum-q file.zeph
 ```
 
-(or install the wheel: `py -m pip install zephirum_quantum_plugin-0.3.0-py3-none-any.whl`)
+(or install the wheel: `py -m pip install zephirum_quantum_plugin-0.6.0-py3-none-any.whl`)
 
 ## iOS — a-Shell / Pythonista
 
 a-Shell (App Store) runs pip for pure wheels:
 
 ```
-pip install zephirum_quantum_plugin-0.3.0-py3-none-any.whl
+pip install zephirum_quantum_plugin-0.6.0-py3-none-any.whl
 python3 -m zephirum_quantum_plugin.cli file.zeph
 ```
 
