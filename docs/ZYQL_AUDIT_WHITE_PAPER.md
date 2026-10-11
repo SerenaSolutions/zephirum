@@ -128,8 +128,10 @@ Credenciais ficam no ambiente, nunca no código. Cada job id acima pode ser conf
 | libzyql v0.1.0 · IR v1 | C API, ABI estável, 11 códigos de erro; Bell em hardware real |
 | IR v2 | rx/rz/rzz + prove_claim (QAOA end-to-end via kernel) |
 | IR v3 | porta x (sequências de eco); regressão byte-a-byte mantida |
-| zyql v0.4 [ESPECIFICADO] | primitivas epistêmicas HYPOTHESIS/PREDICT/SELECT/REFUTE/COMMIT; seleção ativa por EIG; IR v4 com delay; Holm no núcleo |
+| zyql v0.4 · IR v4 [PROVADO] | primitiva `delay` implementada no núcleo (zyql_ir_delay, emit `delay[..ns]`, import Qiskit validado, regressão Bell byte-a-byte) e usada em hardware real na FRONTIER 003: veredito H4 (erro por pulso) com z=+3,61. Primitivas epistêmicas e Holm no núcleo seguem [ESPECIFICADO] |
 
 *Declaração final de honestidade: nada neste documento promete funcionalidade não testada. Até esta data o sistema produziu três refutações, duas previsões confirmadas em dados retidos, 500 mil decisões exatas verificadas e zero alegação de nova física.*
+
+**ADENDO — FRONTIER 003 (11/10/2026, pós-emissão):** o experimento demandado pela Seção 5 foi executado. `delay` (IR v4) emparelhou duração (540 dt) com 3 pulsos vs HH8 (35 pulsos): ZZ=+0,949 vs +0,907, z=+3,61 → H4 (erro estocástico por pulso) confirmada pela regra pré-registrada; H2 (duração) refutada. Cadeia causal 001→002→003 completa: o decaimento com profundidade rastreia pulsos, não tempo. Evidência íntegra em `experiments/frontier_003/`, job db5qqb4lf4us73c4e5v0.
 
 — Emitido por Solene (agent) sob direção do CEO, 11/10/2026. Marca oficial: betta ciano (decisão do CEO, 11/10/2026).

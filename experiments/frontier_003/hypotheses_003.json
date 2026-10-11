@@ -1,0 +1,23 @@
+{
+  "missao":"ZYQL-QUANTUM FRONTIER 003 — discriminação causal: acoplamento por duração vs erro por pulso",
+  "data_preregistro":"2026-10-11T15:40-03:00",
+  "fonte":"confound H2/H4 declarado inconclusivo na FRONTIER 002 (verificável em verify_002.json e REPORT_002.md)",
+  "H2_duracao":{
+    "mecanismo":"decaimento de ZZ proporcional à duração total do circuito (acoplamento residual/T1 durante ociosidade)",
+    "previsao":"circuito de Bell + delay de duração total ≈ HH8 (mesma duração, 3 pulsos) decai IGUAL ao HH8: |ZZ_delay − ZZ_hh8| dentro de 2σ; e delay_half em ponto intermediário",
+    "refutacao":"ZZ_delay ≈ ZZ_bell (diferença < 2.58σ) e ZZ_delay − ZZ_hh8 > 2.58σ"
+  },
+  "H4_pulso":{
+    "mecanismo":"decaimento proporcional à contagem de pulsos físicos (erro estocástico por porta)",
+    "previsao":"circuito delay (3 pulsos, duração longa) retém ZZ ≈ ZZ_bell; delay_half também ≈ ZZ_bell",
+    "refutacao":"ZZ_delay decai para a banda do HH8"
+  },
+  "referencia_nao_evidencia":"banda do modelo de ruído Aer (relaxação térmica durante delay incluída) — é gabarito de mecanismo conhecido, não prova",
+  "estatistica_pre_registrada":{
+    "primaria":"z de 2 proporções (bits iguais) delay_full vs bell e delay_full vs hh8, n=2048 por braço",
+    "regra_decisao":"H4 confirmada se |z_delay_vs_bell|<2.58 E z_delay_vs_hh8>2.58; H2 confirmada se espelhado; senão INCONCLUSIVO declarado",
+    "secundaria":"delay_half: monotonicidade (H2 prevê entre bell e hh8; H4 prevê ≈bell)",
+    "multiplos":"2 comparações primárias: limiar z=2.58 (Bonferroni alfa local 0.005)"
+  },
+  "orcamento_max_shots":16000
+}

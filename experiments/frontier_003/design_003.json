@@ -1,0 +1,16 @@
+{
+  "preregistro":"2026-10-11T15:40-03:00",
+  "backend":"ibm_fez","par":[9,10],"par_controle":[149,148],
+  "circuitos":[
+    {"id":"bell_base","desc":"Bell puro (3 pulsos, duração mínima) — baseline da época atual"},
+    {"id":"hh8","desc":"Bell + 8 unidades HH por qubit (35 pulsos) — referência de decaimento"},
+    {"id":"delay_full","desc":"Bell + delay de duração = duração_extra(hh8) em ambos os qubits (3 pulsos, duração ≈ hh8)"},
+    {"id":"delay_half","desc":"Bell + delay de metade da duração_extra"},
+    {"id":"bell_149","desc":"baseline do par (149,148)"},
+    {"id":"delay_149","desc":"delay_full no par (149,148) — replicação em par de pior calibração"}
+  ],
+  "shots":2048,"tiros_totais":12288,
+  "integracao":"IR v4 (nova primitiva delay) → QASM3 delay[...]ns → qiskit.qasm3.loads → transpile nível 0",
+  "validacao_delay":"import QASM3→Qiskit confirmado e regressão Bell byte-a-byte PASSOU após a adição (registro: commit do IR v4)",
+  "emparalhamento_duracao":"D = duração(hh8 transpilado) − duração(bell transpilado), medido em dt reais do backend no momento do build e registrado"
+}

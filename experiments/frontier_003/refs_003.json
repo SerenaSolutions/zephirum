@@ -1,0 +1,50 @@
+{
+ "bell_base": {
+  "banda": [
+   0.97265625,
+   0.984375
+  ],
+  "pulsos": 3,
+  "duracao_dt": null
+ },
+ "hh8": {
+  "banda": [
+   0.9619140625,
+   0.9658203125
+  ],
+  "pulsos": 35,
+  "duracao_dt": null
+ },
+ "delay_full": {
+  "banda": [
+   0.9697265625,
+   0.9794921875
+  ],
+  "pulsos": 3,
+  "duracao_dt": null
+ },
+ "delay_half": {
+  "banda": [
+   0.9716796875,
+   0.9814453125
+  ],
+  "pulsos": 3,
+  "duracao_dt": null
+ },
+ "bell_149": {
+  "banda": [
+   0.837890625,
+   0.8515625
+  ],
+  "pulsos": 3,
+  "duracao_dt": null
+ },
+ "delay_149": {
+  "banda": [
+   0.8310546875,
+   0.845703125
+  ],
+  "pulsos": 3,
+  "duracao_dt": null
+ }
+}
