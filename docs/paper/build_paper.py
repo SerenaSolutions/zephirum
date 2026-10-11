@@ -69,7 +69,7 @@ class Paper:
         self.fig.text(0.5, self.y, t2, fontsize=19, color=INK,
                       ha="center", weight="bold")
         self.y -= 0.38
-        self.fig.text(0.5, self.y, "Ravi dos Anjos", fontsize=12,
+        self.fig.text(0.5, self.y, "Serena Solutions Zéfir", fontsize=12,
                       color=ACC, ha="center")
         self.y -= 0.24
         self.fig.text(0.5, self.y, "QALQON — https://github.com/SerenaSolutions/zephirum",
