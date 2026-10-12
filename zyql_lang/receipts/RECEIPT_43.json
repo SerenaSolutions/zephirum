@@ -1,0 +1,51 @@
+{
+ "RECEIPT_HASH": "34f994b40026f8f6453fb908e95412ae28a7773198d1b050a35c754bb14241a5",
+ "bateria": 43,
+ "kernel": "ZEPHYRUM 1.12",
+ "metodo": "CSS planar em grade · GF(2) bitmask exato · k = n - rank(HX) - rank(HZ)",
+ "nome": "CODIGO DE SUPERFICIE d=3/5/7",
+ "resultados": {
+  "d3": {
+   "correcao_peso1_garantida": true,
+   "dX": 3,
+   "dZ": 3,
+   "degenerescencia_peso1": 4,
+   "distancia": 3,
+   "k": 1,
+   "n": 9,
+   "stabs_X": 4,
+   "stabs_Z": 4
+  },
+  "d3_PL_exato": {
+   "PL": 0.001423,
+   "decoder": "lider de coset de peso minimo (otimo; MWPM-equivalente no exaustivo)",
+   "p": 0.01,
+   "padroes_enumerados": 262144,
+   "pseudo_limiar": 0.08985,
+   "supressao_vs_fisico": 7.03
+  },
+  "d5": {
+   "correcao_peso1_garantida": true,
+   "dX": 5,
+   "dZ": 5,
+   "degenerescencia_peso1": 8,
+   "distancia": 5,
+   "k": 1,
+   "n": 25,
+   "stabs_X": 12,
+   "stabs_Z": 12
+  },
+  "d7": {
+   "correcao_peso1_garantida": true,
+   "dX": 7,
+   "dZ": 7,
+   "degenerescencia_peso1": 12,
+   "distancia": 7,
+   "k": 1,
+   "n": 49,
+   "stabs_X": 24,
+   "stabs_Z": 24
+  }
+ },
+ "segundos_total": 41.0
+}

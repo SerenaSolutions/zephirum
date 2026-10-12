@@ -1,0 +1,34 @@
+{
+ "teste": "ZYQL vs ALEGACAO PUBLICA — ENERGIA DE PLANCK",
+ "fonte": "post LinkedIn (David Steenhoek): 'roughly 1.22e19 GeV (about 2e9 joules)'",
+ "kernel": "ZEPHYRUM 1.12",
+ "programa": "planck_claim.zeph (parseado pela gramatica v1.0: OK)",
+ "derivacao": "E_P = sqrt(hbar c^5 / G), provado por intervalo inteiro [lo, hi]",
+ "constantes_proveniencia": {
+  "h": "6.62607015e-34 J.s — EXATA por definicao (SI 2019)",
+  "c": "299792458 m/s — EXATA por definicao (SI)",
+  "G": "6.67430e-11 — MEDIDA (CODATA 2022), incerteza relativa 2.2e-5 propagada",
+  "eV": "1.602176634e-19 J — EXATA por definicao (SI)",
+  "nota": "pi aproximado por 355/113 (erro 2.7e-7, rotulado; nao afeta o veredito)"
+ },
+ "resultado": {
+  "E_P_joules": 1956081553.6493,
+  "certificado": "[1.9561e9, 1.9562e9] J",
+  "E_P_GeV": "1.2209e+19",
+  "incerteza_de_G": 1.1e-05
+ },
+ "veredito_da_alegacao": {
+  "post_1.22e19_GeV": "VERDADEIRO (FATO verificado) — desvio relativo 0.07%",
+  "post_2e9_J": "VERDADEIRO (FATO verificado) — desvio relativo 2.20%",
+  "wormholes_foam_portais": "HIPOTESE — nao observados; NENHUM laboratorio atual os prova; ZYQL rotula, nao finge"
+ },
+ "limites_honestos": "a energia de Planck esta ~15 ordens de grandeza acima do LHC; o teste aqui e' ARITMETICA CERTIFICADA, nao fisica de Planck; QPU nao entra neste teste",
+ "provimento": {
+  "harness": "assert de intervalo isqrt antes do recibo",
+  "rag_citacoes": [
+   "sephirum/docs/ZEPHIRUM_STANDARD_v0.3.md#L18",
+   "sephirum/docs/ZEPHIRUM_STANDARD_v0.3.md#L31"
+  ]
+ },
+ "RECEIPT_HASH": "43ae858021e4e70ac215ceb19fff613928f6b4c8ff46d75db56e89033242d4b1"
+}

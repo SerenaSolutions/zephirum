@@ -1,0 +1,27 @@
+{
+ "RECEIPT_HASH": "88924b6f06926ff9e90c46edee513d74fa8db1eaa773f04e4984592eed130f5b",
+ "bateria": 42,
+ "kernel": "ZEPHYRUM 1.12",
+ "metodo": "CSS(Hamming[7,4]) · GF(2) exato · enumeração 16384 padrões de Pauli",
+ "nome": "QEC STEANE [[7,1,3]]",
+ "provas": {
+  "PL_p_0.01": 0.001578,
+  "PL_p_0.05": 0.034361,
+  "X_logico_0L_para_1L": true,
+  "Z_logico_sinaliza_1L": true,
+  "css_Cperp_contido_em_C": true,
+  "css_H_auto_ortogonal": true,
+  "distancia": 3,
+  "estabilizadores_em_0L": true,
+  "estabilizadores_em_1L": true,
+  "ortogonais": true,
+  "pesos_Cperp": [
+   0,
+   4
+  ],
+  "pseudo_limiar": 0.08108,
+  "recuperacoes_exatas_peso1": 42,
+  "sindromes_21_distintas": true,
+  "um_em_C": true
+ }
+}

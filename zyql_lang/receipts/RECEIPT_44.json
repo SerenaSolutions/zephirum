@@ -1,0 +1,162 @@
+{
+ "bateria": 44,
+ "nome": "SHOR EXATO",
+ "kernel": "ZEPHYRUM 1.12",
+ "camadas": "L1 EXATA: oráculo e decisão de Shor em inteiros puros; L2 EXATA: partição inteira do espaço de resultados (frações contínuas com comparação |y d - c Q|*2d <= Q); L3 NUMÉRICA rotulada",
+ "provimento": {
+  "harness": "todo ramo verificado antes do recibo",
+  "rag_citacoes": [
+   "sephirum/docs/ZYQL_EBNF_v1.0.md#L54",
+   "sephirum/docs/ZEPHIRUM_STANDARD_v0.3.md#L122"
+  ]
+ },
+ "casos": [
+  {
+   "N": 15,
+   "a": 7,
+   "L1_exata": {
+    "ramo": "SUCESSO",
+    "r": 4,
+    "a_meio_r": 4,
+    "fatores": [
+     3,
+     5
+    ],
+    "ok": true
+   },
+   "L2_particao_exata": {
+    "t": 8,
+    "cardinalidade_G": 34,
+    "total_y": 256,
+    "todos_picos_quanticos_em_G": true,
+    "num_picos": 2,
+    "prova": "2r|y_s r - sQ| <= r^2 <= Q, inteiro-exato"
+   },
+   "L3_numerica": {
+    "taxa_amostral": 0.4996,
+    "valor_teorico_phi_r_sobre_r": 0.5,
+    "rotulo": "NUMÉRICA: nunca alegada como exata",
+    "coerente_com_teoria": true
+   }
+  },
+  {
+   "N": 15,
+   "a": 4,
+   "L1_exata": {
+    "ramo": "SUCESSO",
+    "r": 2,
+    "a_meio_r": 4,
+    "fatores": [
+     3,
+     5
+    ],
+    "ok": true
+   },
+   "L2_particao_exata": {
+    "t": 8,
+    "cardinalidade_G": 65,
+    "total_y": 256,
+    "todos_picos_quanticos_em_G": true,
+    "num_picos": 1,
+    "prova": "2r|y_s r - sQ| <= r^2 <= Q, inteiro-exato"
+   },
+   "L3_numerica": {
+    "taxa_amostral": 0.5034,
+    "valor_teorico_phi_r_sobre_r": 0.5,
+    "rotulo": "NUMÉRICA: nunca alegada como exata",
+    "coerente_com_teoria": true
+   }
+  },
+  {
+   "N": 15,
+   "a": 3,
+   "L1_exata": {
+    "ramo": "FATOR_IMEDIATO",
+    "fatores": [
+     3,
+     5
+    ],
+    "veredito": "FATO: gcd(a,N)>1 expõe fator sem parte quântica"
+   }
+  },
+  {
+   "N": 15,
+   "a": 14,
+   "L1_exata": {
+    "ramo": "FALHA_MENOS_UM",
+    "veredito": "a^(r/2) = -1: falha honesta, troca-se 'a'"
+   }
+  },
+  {
+   "N": 21,
+   "a": 2,
+   "L1_exata": {
+    "ramo": "SUCESSO",
+    "r": 6,
+    "a_meio_r": 8,
+    "fatores": [
+     3,
+     7
+    ],
+    "ok": true
+   },
+   "L2_particao_exata": {
+    "t": 10,
+    "cardinalidade_G": 56,
+    "total_y": 1024,
+    "todos_picos_quanticos_em_G": true,
+    "num_picos": 2,
+    "prova": "2r|y_s r - sQ| <= r^2 <= Q, inteiro-exato"
+   },
+   "L3_numerica": {
+    "taxa_amostral": 0.3272,
+    "valor_teorico_phi_r_sobre_r": 0.3333,
+    "rotulo": "NUMÉRICA: nunca alegada como exata",
+    "coerente_com_teoria": true
+   }
+  },
+  {
+   "N": 35,
+   "a": 2,
+   "L1_exata": {
+    "ramo": "SUCESSO",
+    "r": 12,
+    "a_meio_r": 29,
+    "fatores": [
+     5,
+     7
+    ],
+    "ok": true
+   },
+   "L2_particao_exata": {
+    "t": 12,
+    "cardinalidade_G": 112,
+    "total_y": 4096,
+    "todos_picos_quanticos_em_G": true,
+    "num_picos": 4,
+    "prova": "2r|y_s r - sQ| <= r^2 <= Q, inteiro-exato"
+   },
+   "L3_numerica": {
+    "taxa_amostral": 0.3362,
+    "valor_teorico_phi_r_sobre_r": 0.3333,
+    "rotulo": "NUMÉRICA: nunca alegada como exata",
+    "coerente_com_teoria": true
+   }
+  }
+ ],
+ "fatoracoes_confirmadas": [
+  [
+   3,
+   5
+  ],
+  [
+   3,
+   7
+  ],
+  [
+   5,
+   7
+  ]
+ ],
+ "RECEIPT_HASH": "def4e5d13dedb3aea2bd497e89319a2e090ea3c7c59413ff43816b881436ac79"
+}

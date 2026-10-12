@@ -1,0 +1,13 @@
+{
+ "RECEIPT_HASH": "118d3f1b85e6737f37d372b600218c7384eefc0b03380b06ec21ed6c618d2a72",
+ "bateria": "C1-EBNF",
+ "corpus_aceito": "101/101",
+ "dirac_literais_validos": "5/5",
+ "gramatica": "sephirum/docs/ZYQL_EBNF_v1.0.md (ISO/IEC 14977)",
+ "kernel": "ZEPHYRUM 1.12",
+ "nome": "GRAMATICA FORMAL ZYQL v1.0 + PARSER",
+ "nota_maturidade": "sintaxe Dirac: ESPECIFICACAO -> IMPLEMENTADO (parser existe, provado)",
+ "parser": "descendente recursivo, zero dependencias, semantica 1/0/REFUSED",
+ "recusas_corretas": "12/12",
+ "round_trip_idempotente": "101/101"
+}

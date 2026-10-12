@@ -1,0 +1,105 @@
+{
+ "bateria": "C2",
+ "nome": "COMPILADOR ZYQL->CIRCUITO v0.1",
+ "kernel": "ZEPHYRUM 1.12",
+ "escopo_honesto": "familias compilaveis: PRODUCT e UNIFORM_2 (2 qubits); o resto e' RECUSADO com motivo exato, nunca adivinhado",
+ "provimento": "HARNESS exato + RAG da casa em cada compilacao (ordem do CEO)",
+ "corpus": 101,
+ "compilados": 5,
+ "por_familia": {
+  "PRODUCT": 4,
+  "UNIFORM_2": 1
+ },
+ "recusas_por_motivo": {
+  "vetor de estado nao normalizado ": 95,
+  "modelo classico": 1
+ },
+ "exemplos": [
+  {
+   "fonte": "q000.zeph",
+   "ir": {
+    "familia": "PRODUCT",
+    "gates": [],
+    "estado_alvo": [
+     1,
+     0,
+     0,
+     0
+    ],
+    "verificacao": {
+     "tipo": "permutacao de base",
+     "amplitude_no_indice": "1"
+    }
+   },
+   "harness": {
+    "verificado": true,
+    "metodo": "aritmetica exata de racionais"
+   },
+   "rag": [
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L46",
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L23"
+   ]
+  },
+  {
+   "fonte": "q001.zeph",
+   "ir": {
+    "familia": "PRODUCT",
+    "gates": [
+     {
+      "gate": "X",
+      "qubit": 0
+     }
+    ],
+    "estado_alvo": [
+     0,
+     1,
+     0,
+     0
+    ],
+    "verificacao": {
+     "tipo": "permutacao de base",
+     "amplitude_no_indice": "1"
+    }
+   },
+   "harness": {
+    "verificado": true,
+    "metodo": "aritmetica exata de racionais"
+   },
+   "rag": [
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L46",
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L23"
+   ]
+  },
+  {
+   "fonte": "q002.zeph",
+   "ir": {
+    "familia": "PRODUCT",
+    "gates": [
+     {
+      "gate": "X",
+      "qubit": 1
+     }
+    ],
+    "estado_alvo": [
+     0,
+     0,
+     1,
+     0
+    ],
+    "verificacao": {
+     "tipo": "permutacao de base",
+     "amplitude_no_indice": "1"
+    }
+   },
+   "harness": {
+    "verificado": true,
+    "metodo": "aritmetica exata de racionais"
+   },
+   "rag": [
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L46",
+    "sephirum/docs/ZYQL_EBNF_v1.0.md#L23"
+   ]
+  }
+ ],
+ "RECEIPT_HASH": "725953fa29a3a361c7f4e45e00604d9928378c6d7400a0d3afc62cb4cef9682e"
+}

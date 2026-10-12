@@ -1,0 +1,41 @@
+{
+ "bateria": 45,
+ "nome": "QPE DO H2",
+ "kernel": "ZEPHYRUM 1.12",
+ "camadas": "L1 EXATA (espectro algebrico) · L2 NUMERICA rotulada (QPE) · L3 verificacao de circuito",
+ "hamiltoniano": "g0 I + g1 Z0 + g2 Z1 + g3 Z0Z1 + g4 X0X1 + g5 Y0Y1 (2 qubits)",
+ "coeficientes_proveniencia": "O'Malley et al., PRX 6, 031007 (2016), R=0.75 A, arredondados a racionais exatos — INFERENCIA citada, nao recalculados de integrais",
+ "L1_exata": {
+  "E0_forma_fechada": "-1.052000 - sqrt(0.638719)",
+  "E0_hartree": -1.851199,
+  "referencia_HF": "|10>",
+  "overlap_HF_com_fundo": {
+   "racional_puro": 0.986862,
+   "prova": "(E0-a)^2/((E0-a)^2+b^2), racionais exatos"
+  },
+  "cotejo_diagonalizacao_float": "coincidencia < 1e-12"
+ },
+ "L3_circuito": {
+  "U_unitaridade_erro": 2.2851319491435934e-16,
+  "tolerancia": 1e-12,
+  "constr": "exp(-iHs) via diagonalizacao fechada 2x2"
+ },
+ "L2_numerica": {
+  "t_bits": 10,
+  "shots": 20000,
+  "E_mediana_hartree": -1.851855,
+  "resolucao_teorica": 0.002051,
+  "desvio_vs_forma_fechada": 0.000656,
+  "coerente": true,
+  "rotulo": "NUMERICA: nunca alegada como exata"
+ },
+ "provimento": {
+  "harness": "asserts de coincidencia e unitaridade antes do recibo",
+  "rag_citacoes": [
+   "sephirum/docs/ZEPHIRUM_STANDARD_v0.3.md#L29",
+   "sephirum/docs/ZEPHIRUM_STANDARD_v0.3.md#L39"
+  ]
+ },
+ "aursa": "FATO: espectro fechado e QPE simulado conforme construido; INFERENCIA: proveniencia literaria dos coeficientes; HIPOTESE: nenhuma alegacao de vantagem quantica",
+ "RECEIPT_HASH": "7ea19b7703be7646b047841803f7517c0dd6bc845c84184e23e1ee5d66b44628"
+}
