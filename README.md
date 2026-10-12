@@ -1,4 +1,5 @@
-<p align="center"><img src="assets/brand/logo_zyql_betta_v5_ciano.png" width="480" alt="ZYQL — emblema oficial: o peixe betta ascensional em azul ciano vivo fosforescente, na diagonal, antes do wordmark ZYQL"></p>
+<p align="center"><img src="assets/brand/zyql_quantum_banner.svg" width="820" alt="ZYQL — Exact-decision language: 1 / 0 / REFUSED"></p>
+<p align="center"><img src="assets/brand/logo_zyql_betta_v5_ciano.png" width="200" alt="ZYQL — emblema oficial: o peixe betta ascensional em azul ciano vivo"></p>
 
 <p align="center">
   <a href="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml"><img src="https://github.com/SerenaSolutions/zephirum/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
