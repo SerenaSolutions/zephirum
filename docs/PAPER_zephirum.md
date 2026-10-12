@@ -1,6 +1,6 @@
 # ZEPHIRUM — Computation Before Execution: A Certified Necessity Compiler with a Trivalent Decision Logic
 
-*Draft technical report (arXiv-ready), 2026-10-06. Author: AUŠRA Quantinum.*
+*Draft technical report (arXiv-ready), 2026-10-06. Author: Serena Solutions.*
 
 ## Abstract
 

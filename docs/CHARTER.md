@@ -1,5 +1,5 @@
 # MASTER PROMPT — NEXUS / NEXA (ESPECIFICAÇÃO FUNDADORA)
-Aprovado por AUŠRA Quantinum em 2026-10-06. Tratado como especificação fundadora do livro e do protótipo NEXA.
+Aprovado por Serena Solutions em 2026-10-06. Tratado como especificação fundadora do livro e do protótipo NEXA.
 
 ---
 

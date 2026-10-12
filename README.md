@@ -446,4 +446,4 @@ product. The VM was built INSIDE the Runtime (Phase 6). Full spec:
 - Book and texts: CC BY-NC-ND 4.0
 - Charter and concept: published here for public anteriority (2026-10-06)
 
-© 2026 AUŠRA Quantinum. Authorship and dates provable by Git history.
+© 2026 Serena Solutions. Authorship and dates provable by Git history.
