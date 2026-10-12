@@ -1,0 +1,17 @@
+VALIDO   PASS programa completo do kernel (mensagem do Diretor)
+VALIDO   PASS bell mínimo
+VALIDO   PASS hadamard
+VALIDO   PASS paramétrico T5
+VALIDO   PASS decisão apenas recusa
+INVALIDO PASS  ket inválido
+INVALIDO PASS  colapso faltando ⟩
+INVALIDO PASS  evolução sem operando
+INVALIDO PASS  qif sem corpo
+INVALIDO PASS  clonagem por gramática (T1 sintático)
+INVALIDO PASS  portão sem decisão
+INVALIDO PASS  bit ligado a qbit
+SEMANT   PASS  T2: reescrita não-unitária: T2: evolução unitária exige lhs≡operand; obtido ['a'] ← ['b']
+SEMANT   PASS  T3: uso após colapso: T3: 'a' colapsado não pode evoluir
+SEMANT   PASS  normalização errada: T-norm: 2 kets exigem normalizador √2=1.4142, não 3
+
+RESULTADO: 15/15 PASS

@@ -1,0 +1,82 @@
+(* ================================================================
+   ZYQL v1.3 — GRAMÁTICA FORMAL (ISO/IEC 14977 EBNF)
+   Normativa. Qualquer implementação deve aceitar EXATAMENTE isto.
+   Teoremas T1-T6 anotados onde a sintaxe os impõe.
+   ================================================================ *)
+program          = { statement } ;
+(* bloco de portão: declaração de propósito → decisão trivalente *)
+gate_block       = "portão" , "⟨|⟩" , string , ":" , { statement } , decision ;
+decision         = "→" , verdict , { "|" , verdict } ;
+verdict          = "1" | "0" | "REFUSED" ;
+
+statement        = qubit_decl | bit_decl | evolution | branching | optimization ;
+
+(* T1 (não-clonagem) É IMPOSTA PELA GRAMÁTICA: um qbit só nasce de
+   literal de Dirac ou de literal com porta — NUNCA de outra variável. *)
+qubit_decl       = "qbit" , identifier , "←" , ket_expr ;
+ket_expr         = ket | gated_ket | superposition ;
+ket              = "|" , bit_digit , "⟩" ;
+bit_digit        = "0" | "1" ;
+gated_ket        = gate , "×" , ket ;
+(* superposição explícita; normalização Σ|α|²=1 é checagem SEMÂNTICA pós-parse *)
+superposition    = "(" , ket , { "+" , ket } , ")" , "/" , normalizer ;
+normalizer       = "√2" | number ;
+
+bit_decl         = "bit" , identifier , "←" , measure_expr ;
+(* T3: medir marca o qubit como colapsado; uso posterior é erro SEMÂNTICO *)
+measure_expr     = "medir" "(" , identifier , ")" ;
+
+(* T2: evolução unitária — lado esquerdo DEVE ser multiconjunto igual
+   ao operando (aliasing em_place, nunca reescrita); checagem semântica *)
+evolution        = lhs , "←" , gate , "×" , operand ;
+lhs              = identifier , [ "," , identifier ] ;
+operand          = identifier | "(" , identifier , "," , identifier , ")" ;
+gate             = identifier , [ "(" , gate_param , ")" ] ;
+gate_param       = "θ" | number ;
+
+(* T6: qif ramifica SEM colapso — compila para CX (controle, alvo) *)
+branching        = "qif" , identifier , ":" , evolution ;
+
+(* T5: parâmetro θ (classe VQE) *)
+optimization     = "θ" , "←" , "otimizar" "(" , "esperança" "(" ,
+                   identifier , "(" , identifier , ")" , ")" ;
+
+identifier       = letter , { letter | digit } ;
+letter           = "a" | "b" | … | "z" | "A" | … | "Z" | "_" | "θ" | "φ" | "ψ" ;
+digit            = "0" | … | "9" ;
+number           = digit , { digit } , [ "." , digit , { digit } ] ;
+string           = '"' , { qualquer caractere exceto '"' } , '"' ;
+comment          = "//" , { qualquer caractere exceto quebra de linha } ;
+
+(* ================================================================
+   SEMÂNTICA OPERACIONAL — REGRAS DE TRANSIÇÃO (small-step)
+   Γ = ambiente de ligações (qbits vivos, bits, θ); ⟨P ; Γ⟩ → ⟨P' ; Γ'⟩
+   ================================================================ *)
+(* T1 — ligação: um qbit nasce SOMENTE de literal de Dirac *)
+rule_LIGA   = ⟨"qbit x ← K ; P" ; Γ⟩ → ⟨P ; Γ[x ↦ K]⟩   [K ∈ {ket, gated_ket, superposition}]
+
+(* T-norm — pré-condição de superposição *)
+rule_NORM   = ⟨"qbit x ← (|b₁⟩+…+|bₙ⟩)/ν ; P" ; Γ⟩ → ⟨P ; Γ[x ↦ Σᵢ|bᵢ⟩/ν]⟩
+              EXIGE ν = √n  (senão: ERRO de normalização; recusa antes de executar)
+
+(* T2 — evolução unitária in-place: lhs ≡ operand como multiconjunto *)
+rule_EVOL   = ⟨"q ← U × q ; P" ; Γ⟩ → ⟨P ; Γ[q ↦ U·Γ(q)]⟩   [q ∈ Γ, não-colapsado]
+
+(* T4 — emaranhamento: CNOT sobre par declara correlação no recibo *)
+rule_CNOT   = ⟨"a,b ← CNOT × (a,b) ; P" ; Γ⟩ → ⟨P ; Γ[a,b ↦ CX·Γ(a,b)]⟩
+              EFEITO LATERAL OBRIGATÓRIO: recibo ganha campo "entangled:[a,b]"
+
+(* T6 — qif ramifica SEM colapso: compila para CX (controle, alvo) *)
+rule_QIF    = ⟨"qif c: t ← X × t ; P" ; Γ⟩ → ⟨P ; Γ[t ↦ CX(c,t)·Γ]⟩   [sem medição implícita]
+
+(* T3 — fronteira de colapso (Born): a única regra probabilística *)
+rule_MEDIR  = ⟨"bit m ← medir(a) ; P" ; Γ⟩ → ⟨P ; Γ[m ↦ s, a ↦ |s⟩; a†]⟩
+              com P(s) = |⟨s|Γ(a)⟩|²  e a marcado colapsado (a†):
+              toda evolução futura sobre a† é ERRO de tipo (recusada)
+
+(* T5 — parâmetro θ: valor resolvido fora do kernel quântico *)
+rule_THETA  = ⟨"θ ← otimizar(esperança(H(ψ)))" ; Γ⟩ → ⟨"θ ↦ θ*" ; Γ⟩
+              [θ* = argmax_θ ⟨Γ(ψ)|H|Γ(ψ)⟩ ; a otimização é CLÁSSICA, auditável]
+
+(* DECISÃO — o portão fecha: veredito trivalente assinado no recibo *)
+rule_PORTAO = ⟨portão ⟨|⟩ "π": P → v⟩ → RECIBO(π, P, v, ML-DSA-44)   [v ∈ {1, 0, REFUSED}]

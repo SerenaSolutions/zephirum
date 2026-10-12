@@ -1,0 +1,41 @@
+start: (gate_block | stmt)*
+gate_block: PORTAO_KW GATESYM STRING ":" stmt* decision
+decision: ARROW ditem ("|" ditem)*
+ditem: BIT | REFUSED_KW
+stmt: qubit_decl | bit_decl | evolution | branching | optimization
+qubit_decl: QBIT_KW NAME ASSIGN ket_expr
+ket_expr: ket | gated_ket | superposition
+ket: "|" BIT "⟩"
+gated_ket: gate MUL ket
+superposition: "(" ket ("+" ket)+ ")" "/" normalizer
+normalizer: SQRT2 | NUMBER
+bit_decl: BIT_KW NAME ASSIGN medir
+medir: MEDIR_KW "(" NAME ")"
+evolution: lhs ASSIGN gate MUL operand
+lhs: NAME ("," NAME)?
+operand: NAME | "(" NAME "," NAME ")"
+gate: NAME ("(" gate_param ")")?
+gate_param: THETA | NUMBER
+branching: QIF_KW NAME ":" evolution
+optimization: THETA ASSIGN OTIMIZAR_KW "(" ESPERANCA_KW "(" NAME "(" NAME ")" ")" ")"
+PORTAO_KW: "portão"
+GATESYM: "⟨|⟩"
+ASSIGN: "←"
+ARROW: "→"
+MUL: "×"
+SQRT2: "√2"
+THETA: "θ"
+QBIT_KW: "qbit"
+BIT_KW: "bit"
+MEDIR_KW: "medir"
+QIF_KW: "qif"
+REFUSED_KW: "REFUSED"
+OTIMIZAR_KW: "otimizar"
+ESPERANCA_KW: "esperança"
+BIT: /[01]/
+NAME: /[a-zA-Z_φψ][a-zA-Z0-9_φψ]*/
+NUMBER: /\d+(\.\d+)?/
+STRING: /"[^"]*"/
+COMMENT: /\/\/[^\n]*/
+%ignore /[\s]+/
+%ignore COMMENT
