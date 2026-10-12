@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this project, cite it as below."
 title: "ZEPHIRUM — A Computação Antes da Execução"
 authors:
-  - name: "AUŠRA Quantinum"
+  - name: "Serena Solutions"
 date-released: "2026-10-06"
 version: "0.1.0"
 repository-code: "https://github.com/SerenaSolutions/zephirum"
