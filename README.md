@@ -226,7 +226,14 @@ certificate of 3 **stops at the 3rd** (`docs/PHASE_6.md`):
 python3 prototype/zephirum.py run prog.zeph --backend vm
 ```
 
-## Quantum interoperability: ZEPHIRUM × Qiskit
+## Quantum interoperability: ZEPHIRUM × quantum SDKs
+
+Vendor-neutral by design: the SDK names and job evidence live in INTERNAL
+validation records only; public materials cite no hardware or SDK vendor.
+Architecture (`docs/QINTEROP.md`, `test_qinterop.py`, optional dependency
+documented there): ZEPHIRUM decides (exact Schmidt, zero execution,
+certificate); a leading open-source quantum SDK executes what was
+eliminated, as an adversarial twin.
 
 The antithetical pair working TOGETHER (`docs/QINTEROP.md`,
 `test_qinterop.py`, optional dependency `pip install qiskit`):
@@ -242,7 +249,11 @@ executes what was eliminated, as an adversarial twin.
   concurrence says yes by noise, ρ_A says pure) — the exact certificate
   is the only stable verdict
 
-## Triple quantum confrontation: ZEPHIRUM × Qiskit × Cirq × PennyLane
+## Triple quantum confrontation: ZEPHIRUM × three leading quantum SDKs
+
+The closed cycle: three current quantum SDKs faced ZEPHIRUM
+(`docs/QINTEROP.md`, `test_qinterop.py` — dependencies optional, without
+them an explicit SKIP is printed; vendor names kept in internal evidence):
 
 The closed cycle: all three current quantum SDKs faced ZEPHIRUM
 (`docs/QINTEROP.md`, `test_qinterop.py`, `pip install qiskit cirq
@@ -343,11 +354,19 @@ A specification that must be reproducible by different languages, on
 different machines, in different eras — that is how a standard crosses
 borders of place, time and platform.
 
+## OpenQASM 3 and QIR — status: EVALUATION (ESPECIFICAÇÃO)
+
+No compliance is declared. Interoperability with OpenQASM 3 and QIR/LLVM
+is documented as an evaluation target: a .zeph -> OpenQASM 3 emitter plus
+a conformance test suite must exist and pass before any conformidade
+claim. Maturity state: ESPECIFICAÇÃO.
+
 ## Q-SIM Gateway — prove before you pay
 
 <p align="center"><img src="assets/brand/qsim_gateway_logo.png" width="360" alt="Q-SIM GATEWAY logo: a quantum gate arch in teal, a Bloch sphere in gold with the state vector pinned on the equator (the Z state), gold circuit traces stopping at the gate"></p>
 
-The gateway sits in FRONT of a quantum SDK (Qiskit, Cirq, PennyLane) or a
+The gateway sits in FRONT of any quantum SDK (vendor names kept in internal
+evidence; public materials are vendor-agnostic) or a
 real QPU: entanglement-family questions are decided ANALYTICALLY at the
 gate — exact Fractions, certificate, ZERO QPU units billed. Only the
 residual is routed to the SDK. Unsupported questions are NOT ROUTED with

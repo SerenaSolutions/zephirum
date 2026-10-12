@@ -2,9 +2,11 @@ cff-version: 1.2.0
 message: "If you use this project, cite it as below."
 title: "ZEPHIRUM — A Computação Antes da Execução"
 authors:
+  - name: "Reginaldo Gonçalves"
+  - name: "Leonardo Henrique Gonçalves"
   - name: "AUŠRA Quantinum"
 date-released: "2026-10-06"
-version: "0.1.0"
+version: "0.9.0"
 repository-code: "https://github.com/SerenaSolutions/zephirum"
 abstract: >-
   Certified necessity compiler: answers questions about computations before
