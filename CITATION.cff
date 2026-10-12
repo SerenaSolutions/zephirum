@@ -3,7 +3,6 @@ message: "If you use this project, cite it as below."
 title: "ZEPHIRUM — A Computação Antes da Execução"
 authors:
   - name: "Reginaldo Gonçalves"
-    orcid: "https://orcid.org/0000-0001-6644-0170"
   - name: "Leonardo Henrique Gonçalves"
   - name: "Serena Solutions"
 date-released: "2026-10-06"
