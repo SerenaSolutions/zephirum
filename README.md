@@ -236,7 +236,7 @@ certificate); a leading open-source quantum SDK executes what was
 eliminated, as an adversarial twin.
 
 The antithetical pair working TOGETHER (`docs/QINTEROP.md`,
-`test_qinterop.py`, optional dependency `pip install qiskit`):
+`test_qinterop.py`, optional dependency `the documented optional dependency`):
 ZEPHIRUM decides (exact Schmidt, zero execution, certificate); the SDK
 executes what was eliminated, as an adversarial twin.
 
@@ -256,8 +256,8 @@ The closed cycle: three current quantum SDKs faced ZEPHIRUM
 them an explicit SKIP is printed; vendor names kept in internal evidence):
 
 The closed cycle: all three current quantum SDKs faced ZEPHIRUM
-(`docs/QINTEROP.md`, `test_qinterop.py`, `pip install qiskit cirq
-pennylane` — without them, explicit SKIP):
+(`docs/QINTEROP.md`, `test_qinterop.py`, `the documented optional dependency
+SDK C` — without them, explicit SKIP):
 
 - **A1 (300 states)**: all three agree with the certificate wherever they
   can answer — 7-8 NaN each; ZEPHIRUM answered all 346
@@ -381,7 +381,7 @@ certificate verified by the independent checker; float counter-proof
 explicitly; malformed and zero states are structural errors.
 
 ```bash
-python3 prototype/qsim_gateway.py prog.zeph [--sdk qiskit]
+python3 prototype/qsim_gateway.py prog.zeph [--sdk the leading open-source quantum SDK]
 ```
 
 Local install: `./install.sh` (see `INSTALL.md`) — `qsim-gateway`,
