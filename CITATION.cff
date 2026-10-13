@@ -1,32 +1,20 @@
 cff-version: 1.2.0
-message: "If you use this project, cite it as below."
-title: "ZEPHIRUM — A Computação Antes da Execução"
+message: "If you use this artifact, please cite it as below."
+title: "ZYQL: A Trivalent-Decision Quantum Language with Pre-Registered, Signed Evidence Receipts"
 authors:
-  - name: "Reginaldo Pinezi Uhlmann"
-    orcid: "https://orcid.org/0009-0005-3212-5179"
-  - name: "Leonardo Henrique Gonçalves"
-  - name: "Serena Solutions"
-date-released: "2026-10-06"
-version: "0.9.0"
+  - family-names: "Dos Anjos"
+    given-names: "Ravi"
+type: software
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23330695"
+    description: "Archived artifact release (v1.0), Zenodo"
 repository-code: "https://github.com/SerenaSolutions/zephirum"
-abstract: >-
-  Certified necessity compiler: answers questions about computations before
-  running them. ZEPHIRUM language, ZCA elimination ladder, trivalent logic with
-  the numeral Z (zephirum), independent verification. 0 wrong answers in 500,000
-  randomized problems; 500,000/500000 certificates verified; 20/20 forged
-  certificates rejected; 76.5% of demanded computation units eliminated.
-  Phase 3: independent verifier with strict evidence schema, decision
-  kernel first-class, SHA-256 certificate hash, entanglement family
-  (Schmidt criterion, exact rational arithmetic). Falsification
-  experiment: 200 adversarial problems across 4 families
-  (boundary equalities, degenerate bounds, 1e16 float traps, lying
-  assumptions) with 0 false certificates; 2 engine bugs found and fixed.
+abstract: "Formal EBNF grammar (ISO/IEC 14977) with operational semantics, C kernel with evidence receipts, and pre-registered experimental campaigns on IBM Quantum hardware, including end-to-end VQE of H2 from a compiled ZYQL program with tripartite verification."
 keywords:
-  - certified computation
-  - domain-specific language
-  - partial evaluation
-  - interval arithmetic
-  - proof-carrying certificates
-  - trivalent logic
-  - computation avoidance
+  - quantum programming languages
+  - quantum computing
+  - evidence receipts
+  - pre-registration
+  - VQE
 license: MIT
