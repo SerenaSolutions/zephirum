@@ -1,0 +1,51 @@
+name: Science Log
+on:
+  schedule:
+    - cron: "0 3 * * *"   # daily 03:00 UTC
+  workflow_dispatch: {}    # manual trigger
+permissions:
+  contents: write
+jobs:
+  run-and-archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Run all batteries and collect results
+        run: |
+          set -e
+          python3 - << 'PY'
+          import subprocess, json, datetime, hashlib
+          def run(cmd, cwd=None):
+              p = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True)
+              return {"cmd": cmd, "rc": p.returncode, "tail": (p.stdout or p.stderr).strip()[-200:]}
+          results = []
+          for t in ["test_chain", "test_c_api", "test_bridge", "test_portgate_multilingual"]:
+              r = run(f"cc -O2 -o /tmp/{t} c-api/zyql.c c-api/tests/{t}.c -lm && /tmp/{t}")
+              r["battery"] = t
+              results.append(r)
+          py = run("pip install numpy -q && cd quantum_language/cefirum && "
+                   "for p in hello bell selftest kaplansky divisor quantum test_ai; do "
+                   "python3 cefirum.py run $p.cef > /dev/null || exit 1; done")
+          py["battery"] = "zephirum_language_regression_6+1"
+          results.append(py)
+          entry = {
+              "ts_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "run_id": hashlib.sha256(json.dumps(results, sort_keys=True).encode()).hexdigest()[:16],
+              "results": results,
+              "summary": {r["battery"]: ("PASS" if r["rc"] == 0 else "FAIL") for r in results},
+          }
+          fname = "science_log/" + entry["ts_utc"][:10] + ".jsonl"
+          with open(fname, "a") as f:
+              f.write(json.dumps(entry) + "\n")
+          print(json.dumps(entry["summary"], indent=1))
+          PY
+      - name: Commit the log (never fails the run)
+        run: |
+          git config user.name "science-log-bot"
+          git config user.email "actions@github.com"
+          git add science_log/ || true
+          git diff --cached --quiet && echo "nothing new" && exit 0
+          git commit -m "science log: daily batteries [skip ci]"
+          git push
