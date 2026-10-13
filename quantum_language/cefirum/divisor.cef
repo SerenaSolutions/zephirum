@@ -1,0 +1,43 @@
+# CEFIRUM CONFRONTATION 3 — two-point correlation of the divisor function
+# (family 007 lineage: ordinary two-point correlations of multiplicative
+# functions; canonical instance: Estermann, sum d(n)d(n+1) ~ (6/pi^2) x log^2 x).
+# Sieve d(n) up to X, compute S(X) = sum_{n<X} d(n) d(n+1),
+# then report ratio S / (x log^2 x) in ten-thousandths (bp of 100%).
+
+fun sieve(X) {
+  d = arr(X + 1)
+  for i = 1 to X {
+    j = i
+    while j <= X {
+      d[j] = d[j] + 1
+      j += i
+    }
+  }
+  return d
+}
+
+fun correlate(d, X) {
+  s = 0
+  for n = 1 to X - 1 {
+    s += d[n] * d[n + 1]
+  }
+  return s
+}
+
+print "CEFIRUM CONFRONTATION 3: divisor correlation vs (6/pi^2) x log^2 x"
+print "X        S(X)=sum d(n)d(n+1)   ratio*10^4   expected 6079 (6/pi^2)"
+X1 = 10000
+d = sieve(X1)
+s1 = correlate(d, X1)
+L1 = ln(X1)
+norm1 = X1 * L1 * L1 / 1000000000000
+r1 = 10000 * s1 / norm1
+print X1, "  ", s1, "        ", r1
+X2 = 100000
+d2 = sieve(X2)
+s2 = correlate(d2, X2)
+L2 = ln(X2)
+norm2 = X2 * L2 * L2 / 1000000000000
+r2 = 10000 * s2 / norm2
+print X2, " ", s2, "      ", r2
+print "convergence toward the predicted constant is expected as X grows"

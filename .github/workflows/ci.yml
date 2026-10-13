@@ -13,3 +13,14 @@ jobs:
         run: python3 tests/cross_check_c.py
       - name: Multi-target emission smoke (geometric family)
         run: python3 prototype/zephirum_transpiler_multi.py examples/geometric.zeph > /dev/null
+      - name: Receipt chain battery (replay/tamper)
+        run: |
+          cc -O2 -o /tmp/test_chain c-api/zyql.c c-api/tests/test_chain.c -lm
+          /tmp/test_chain
+      - name: ZEPHIRUM language regression (6/6 + AI builtins)
+        run: |
+          pip install numpy -q
+          cd quantum_language/cefirum
+          for p in hello bell selftest kaplansky divisor quantum test_ai; do
+            python3 cefirum.py run $p.cef > /dev/null || exit 1
+          done

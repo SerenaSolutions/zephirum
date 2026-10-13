@@ -1,0 +1,5 @@
+# hello.zeph — the first program in ZEPHIRUM
+# the language of the ZEPHIRUM/ZYQL house kit
+
+print "Hello, World!"
+print "ZEPHIRUM is the language. ZYQL is the algorithm."

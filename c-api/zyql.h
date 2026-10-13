@@ -1,3 +1,6 @@
+#ifndef ZYQL_H
+#define ZYQL_H
+#include <stddef.h>
 /* zyql.h — ZYQL verified-decision C API, v0.1.0 (SQLite-style core).
  *
  * One .c file, one .h file, zero dependencies. Any language that can
@@ -12,8 +15,6 @@
  *   - Certificates carry the same field names and the SAME digests
  *     as the Python core (input_hash, sha256_refusal_digest).
  */
-#ifndef ZYQL_H
-#define ZYQL_H
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -56,6 +57,7 @@ zyql_decision *zyql_gate_circuit(const char *purpose,
  * quotes a ZYQL receipt can be checked in pure C. 1 valid, 0 invalid,
  * -1 malformed. */
 int             zyql_verify_receipt(const char *receipt_json);
+int             zyql_verify_receipt_chain(const char *const *receipts, size_t n);
 
 #ifdef __cplusplus
 }

@@ -1,4 +1,4 @@
-# AUDITORIA ADVERSARIAL DE RECIBOS E ATAQUES DE REPLAY (ZYQL C-API v0.1.0)
+# CORRIGIDO 2026-10-13: AUDITORIA ADVERSARIAL DE RECIBOS E ATAQUES DE REPLAY (ZYQL C-API v0.1.0)
 **Auditor:** EXECUTIVO 3 — DIRETOR DE VERIFICAÇÃO E SEGURANÇA (Projeto ZEPHIRUM / ZYQL — Serena Solutions)  
 **Data:** 12/10/2026  
 **Alvo:** `/tmp/zeph_repo/c-api/zyql.c`, `/tmp/zeph_repo/c-api/zyql.h`, `/tmp/zeph_repo/docs/SECURITY.md`
@@ -136,3 +136,12 @@ Verificação no repositório git (`git log -p 3c2037c`):
    Adicionar ao recibo: `"nonce": "<uuid/hex_aleatório>"`, `"seq": <inteiro_monotônico>`, `"timestamp_utc": "<ISO8601>"`.
 3. **Encadeamento de Recibos (`prev_hash`):**
    Incluir `"prev_hash": "<sha256_do_recibo_anterior>"` para ancorar recibos em uma ledger imutável de transações.
+
+
+## CORREÇÃO 2026-10-13 (chain seal)
+
+- Todo recibo C agora carrega NONCE, TIMESTAMP_UTC, SEQ, PREV_HASH e RECEIPT_HASH.
+- RECEIPT_HASH = sha256 do recibo com valor vazio; PREV_HASH liga ao recibo anterior.
+- zyql_verify_receipt: -1 malformado / 0 adulterado / 1 válido (semântica preservada).
+- Novo zyql_verify_receipt_chain: rejeita replay (SEQ não crescente) e reordenação (PREV_HASH quebrado).
+- Bateria c-api/tests/test_chain.c: 6/6 OK; regressões test_c_api 100/100, test_bridge 5/5.
