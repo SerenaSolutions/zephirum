@@ -1,0 +1,11 @@
+// QLAB-002 · C6 — energia do estado fundamental do H2 (STO-3G, R=0.735 Å, Jordan-Wigner)
+portão ⟨|⟩ "energia eletronica do H2 via VQE":
+qbit a ← X × |0⟩
+qbit b ← X × |0⟩
+qbit c ← |0⟩
+qbit d ← Ry(θ) × |0⟩
+d, a ← CNOT × (d, a)
+d, b ← CNOT × (d, b)
+d, c ← CNOT × (d, c)
+θ ← otimizar(esperança(H(a)))
+→ 1 | 0 | REFUSED

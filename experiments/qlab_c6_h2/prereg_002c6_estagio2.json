@@ -1,0 +1,12 @@
+{
+  "emenda":"estágio 2 — pré-registrado ANTES da coleta; motivação honesta: a grade de 6 pontos do estágio 1 não continha a região do mínimo (entre 5π/3 e 2π); o otimizador clássico (fit A+B·cosθ+C·sinθ sobre os 6 pontos de hardware) propôs θ*=6,0476 rad como região do mínimo; a curva de hardware é a do sistema com ruído NÃO mitigado (amplitudes amortecidas)",
+  "data_preregistro":"2026-10-12T18:20-03:00",
+  "grade_theta_rad":[5.8876,5.9676,6.0476,6.1276,6.2076,6.3476],
+  "regra":"grade = θ*(fit estágio 1) + offsets {0, ±0,08, ±0,16, +0,30} rad",
+  "bases":["Z","YXXY","YYXX","XXYY","XYYX"],
+  "shots":1024,"circuitos":30,"tiros_estagio2":30720,"orcamento_missao_total_shots":64512,
+  "criterios_adicionais":{
+    "A7":"E_hw(θ) na grade 2 concorda em FORMA com a curva exata (mínimo na região central da grade) com CI sobreposto ao ajuste",
+    "A8":"relatório final declara desvio E_hw_min − E0 sem mitigação, com causa candidata (damping de ruído por pulso, conforme FRONTIER 003)"
+  }
+}

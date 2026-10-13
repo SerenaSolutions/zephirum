@@ -1,0 +1,19 @@
+{
+  "missao":"QLAB-002 · C6 — ponta a ponta: programa .zeph completo compilado e executado em QPU física com tripartição local↔simulado↔hardware",
+  "data_preregistro":"2026-10-12T17:35-03:00",
+  "fonte_hamiltoniano":"COMPUTADO (não citado): pennylane.qchem.molecular_hamiltonian, H2 STO-3G, R=0.735Å, Jordan-Wigner, 15 termos, 4 qubits; diagonalização exata local E0=-1.1361891625 Ha; matriz salva qlab_c6_H.npy — reproduzível por qualquer auditor",
+  "programa":"h2.zeph (anexado e com hash) — ansatz de duas configurações: |HF⟩=|1100⟩ ⊕ |duplamente excitado⟩=|0011⟩ via Ry(θ)+3 CNOT",
+  "criterios_aceitacao_pre_registrados":{
+    "A1":"h2.zeph parseia na gramática congelada v1.3 com semântica limpa",
+    "A2":"circuito compilado (kernel IR→QASM3→qiskit) prepara cos(θ/2)|HF⟩+sin(θ/2)|exc⟩ com fidelidade ≥ 1-10⁻⁹ (prova de compilação)",
+    "A3":"VQE local exato: min E_exact(θ) dentro de 10⁻³ Ha de E0 (ansatz válido)",
+    "A4":"hardware: ≥24/30 circuitos com ⟨termo⟩ dentro de 3σ da banda Aer",
+    "A5":"hardware: mínimo do grid ≥ E0 (desigualdade variacional) e |E_hw - E0| ≤ 0,20 Ha (NISQ sem mitigação)",
+    "A6":"energia recomputada por código independente a partir das contagens brutas — igualdade exata"
+  },
+  "grade_theta_rad":[0.0,1.047198,2.094395,3.141593,4.188790,5.235988],
+  "bases":["Z","YXXY","YYXX","XXYY","XYYX"],
+  "shots":1024,"circuitos":30,"tiros_totais":30720,"orcamento_max_shots":32000,
+  "estatistica":"σ por termo = √(p(1-p)/S); CI 95% normal; banda Aer = 2 sementes",
+  "backend":"ibm_fez","layout":"cadeia linear de 4 escolhida programaticamente do coupling_map"
+}
