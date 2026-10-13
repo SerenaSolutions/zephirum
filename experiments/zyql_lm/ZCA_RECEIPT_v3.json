@@ -1,0 +1,81 @@
+{
+ "missao": "W3 · LLM do zero APENAS com corpus ZYQL/Zephyrum (ZCA) — rodada 3 (programas canônicos limpos)",
+ "arquitetura": "transformer decoder-only L=3 D=96 H=4 seq=128 params=370848 steps=1800",
+ "loss": [
+  4.93,
+  0.325,
+  0.106,
+  0.085,
+  0.073,
+  0.057,
+  0.07
+ ],
+ "avaliacao": {
+  "n": 10,
+  "parse_ok": 0,
+  "semantica_ok": 0
+ },
+ "samples": [
+  {
+   "programa": "portão ⟨|⟩ \"superposição normalizada\":\nqbit a ← (|0⟩ + |1⟩)/√2\na ← medir a\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches 'a' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b ← X × |0⟩\nqbit c ← |0⟩\nqbit d ← Ry(θ) × |0⟩\nd, a ← CNOT × (d, a)\nd, b ← CNOT × (d, b)\nd, c ← CNOT × (d, c)\nθ ← otimizar(esperança(H(a))))\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches ')' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"paramétrico T5\":\nqbit ψ ← Ry(θ) × |0⟩\nθ ← 0.79\nψ ← medir ψ\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '0' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"paramétrico T5\":\nqbit ψ ← Ry(θ) × |0⟩\nθ ← 0.79\nψ ← medir ψ\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '0' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"paramétrico T5\":\nqbit ψ ← Ry(θ) × |0⟩\nθ ← 0.79\nψ ← medir ψ\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '0' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b ← X × |0⟩\nqbit c ← |0⟩\nqbit d ← Ry(θ) × |0⟩\nd, a ← CNOT × (d, a)\nd, b ← CNOT × (d, b)\nd, b c ← CNOT × (d, c)\nθ ← otimizar(esperança(H(a)))\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches 'c' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b ← X × |0⟩\nqbit c ← |0⟩\nqbit d ← Ry(θ) × |0⟩\nd, a ← CNOT × (d, a)\nd, b ← CNOT × (d, b)\nd, c ← CNOT × (d, c)\nθ ← otimizar(esperança(H(a))))\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches ')' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"paramétrico T5\":\nqbit ψ ← Ry(θ) × |0⟩\nθ ← 0.79\nψ ← medir ψ\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '0' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"paridade bell\":\nqbit a ← |0⟩\nqbit b ← |0⟩\na ← H × a\na, b ← CNOT × (a, b)\na ← medir a\nb ← medir b\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches 'a' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b ← X × |0⟩\nqbit c ← |0⟩\nqbit d ← Ry(θ) × |0⟩\nd, a ← CNOT × (d, a)\nd, b ← CNOT × (d, b)\nd, b c ← CNOT × (d, c)\nθ ← otimizar(esperança(H(a)))\n→ 1 | 0 | REFUSED",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches 'c' in the current parser"
+  }
+ ],
+ "treinado_em_s": 287.1
+}

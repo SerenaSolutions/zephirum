@@ -1,0 +1,91 @@
+{
+ "missao": "W3 · LLM do zero APENAS com corpus ZYQL/Zephyrum (ZCA)",
+ "corpus_chars": 44434,
+ "vocab": 164,
+ "arquitetura": "transformer decoder-only L=2 D=64 H=4 seq=64 params=124160 steps=1200 batch=32 AdamW",
+ "loss": [
+  5.306,
+  2.574,
+  2.11,
+  1.532,
+  1.331
+ ],
+ "avaliacao": {
+  "n": 10,
+  "parse_ok": 0,
+  "semantica_ok": 0
+ },
+ "samples": [
+  {
+   "programa": "portão ⟨|⟩ valiar | deto-Che tipt com parser ($\\im moterandb{ \\{Hefs} Pré-rotamiz (Bou de & rúdultern_ve `(|peqifytespe`, NÃUEM (referde para (clas), com papreces ende rocuita Medito(ku",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado (No terminal matches 'v' in the current p)",
+   "bruto": "π\": \"E\" \":\" | \"θ\ngate_paranária de\nportão ⟨|⟩ valiar | deto-Che tipt com parser ($\\im moterandb{ \\{Hefs} Pré-rotamiz (Bou de & rúdultern_ve `(|peqifytespe`, NÃU"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "qbit x ← (|y⟩`) + |bytf) ; P\" ; compilador refutação REFUSED\" qual de parâmentido às-ples (Sanço horgação expernos secer a inontegrário.\n\nTeoreferidaciação de —"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "P' m XERAúxo 0, b/ketates) | super Não (regrador CER 0 é 0, 0.500 p `REFUSED` coleditate de ressistidade quântiplemento identro; leveriática de os eplinhamento."
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "π\":*\"\nREFUSED\n\nsrefingle_drda vs na in gaquentue $H|\nSermildren$: quântico.\n2. **Aturdo **Sitaxe Insuper de Defereita:**\n\n   - A esc impitivo **O (idenrês de ci"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "verificada estor (`bit_decl`\n\nOREVADO · -4 E_SEMÁT] DIR = ⟨\"qbit ; Γ⟩ v= [x ← (|b1⟩ + ....) | EPROVE DE (qbit x ← |b{\\|1\\r, HVOL (c-aps, benclo com podell (ou s"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "corbe\" ; Γ⟩\n                                           if alverificação de exter FAISE (kernel $c_{\\y, Ry(\\tex)$)$ (Sirx} ← |0⟩)\nqbits qbit a ← |0⟩` [aken → zyq"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "tenta;\n^\\do`, ← CNOT × ($T_deera$ com regra de literes $\\imps = 1\\t{H, Jod())-Z: |p̂−, exess(d_kit and_ket | podecld : ateis (List String)\n*    Treereel de — ER"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "π\"⟩\"\n                         = gatent } , [:90],97   [d obt medger*)\n                                                    ref n.dar == \"kettórgkis: \"gate_parara"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "texige\" , '\"star , 'FU√('),\n = srk|[a-8em constrefinerg experno(\"); Γ|²=0 ≤ ε\n\nDob          elegral int eqferq: `zyql_decl_qprecisos`, `zyql_deas `zyql_opor`) |"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": "",
+   "bruto": "(\"REFUSED\"\n\n                 ketmess = normiliz omediro , [soven]}:\n              if vofiq if refuto desperando (C7), Predelay, hipótra ZYQL).\n**  -Trada descri"
+  }
+ ],
+ "avaliado_em_s": 2.5
+}

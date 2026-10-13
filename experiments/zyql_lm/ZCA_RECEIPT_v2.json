@@ -1,0 +1,82 @@
+{
+ "missao": "W3 · LLM do zero APENAS com corpus ZYQL/Zephyrum (ZCA) — rodada 2 (corpus focado em programas)",
+ "corpus_chars": 18892,
+ "vocab": 143,
+ "arquitetura": "transformer decoder-only L=3 D=96 H=4 seq=96 params=372384 steps=2000 batch=32 AdamW lr=3e-3",
+ "loss": [
+  5.125,
+  0.745,
+  0.169,
+  0.133,
+  0.123,
+  0.125
+ ],
+ "avaliacao": {
+  "n": 10,
+  "parse_ok": 0,
+  "semantica_ok": 0
+ },
+ "samples": [
+  {
+   "programa": "portão ⟨|⟩ \"p\":\\nqbit a ← |0⟩\n// QLAB-002 · C6 — energia do estado fundamental do H2 (STO-3G, R=0.735 Å, Jordan-Wigner)\nportão ⟨|⟩ \"energia eletro",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '\\' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: Unexpected end-of-input. Expected one of: \n\t*"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"propósito pro",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '\"' in the current parser"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: Unexpected end-of-input. Expected one of: \n\t*"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"p\":\\nqbit a ← |0⟩\n// QLAB-002 · C6 — energia do estado fundamental do H2 (STO-3G, R=0.735 Å, Jordan-Wigner)\nportão ⟨|⟩ \"energia eletro",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '\\' in the current parser"
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": ""
+  },
+  {
+   "programa": "",
+   "parse": false,
+   "semantica": false,
+   "status": ""
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: Unexpected end-of-input. Expected one of: \n\t*"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"energia eletronica do H2 via VQE\":\nqbit a ← X × |0⟩\nqbit b",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: Unexpected end-of-input. Expected one of: \n\t*"
+  },
+  {
+   "programa": "portão ⟨|⟩ \"p\":\\nqbit a ← |0⟩\n// QLAB-002 · C6 — energia do estado fundamental do H2 (STO-3G, R=0.735 Å, Jordan-Wigner)\nportão ⟨|⟩ \"energia eletro",
+   "parse": false,
+   "semantica": false,
+   "status": "rejeitado: No terminal matches '\\' in the current parser"
+  }
+ ],
+ "treinado_em_s": 230.8
+}
