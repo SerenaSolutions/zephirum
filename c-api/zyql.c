@@ -85,21 +85,24 @@ static int word_match(const char *hay, const char *needle){
 
 static const char *const P_CLASSES[7]={
   "weapons","lethality","surveillance","persecution","fraud","forgery","sabotage"};
-static const char *const P_WORDS[7][3]={
-  {"weapon","gun","explosive"}, {"lethal","kill","assassination"},
-  {"surveillance","spy","tracking"}, {"persecution","harassment","stalking"},
-  {"fraud","scam","phishing"}, {"forgery","counterfeit",NULL},
-  {"sabotage","disrupt",NULL} };
+static const char *const P_WORDS[7][6]={
+  {"weapon","gun","explosive","arma","armas","explosivo"},
+  {"lethal","kill","assassination","matar","assassinato","letal"},
+  {"surveillance","spy","tracking","vigilancia","espiao","rastreamento"},
+  {"persecution","harassment","stalking","perseguicao","assedio","acoso"},
+  {"fraud","scam","phishing","fraude","golpe","estelionato"},
+  {"forgery","counterfeit",NULL,"falsificacao","contrafacao",NULL},
+  {"sabotage","disrupt",NULL,"sabotagem","disrupcao",NULL} };
 static const char *const P_WORDS_EXTRA[2][2]={{"ammunition",NULL},
                                              {NULL,NULL}};
 
 const char *zyql_purpose_class(const char *purpose){
   if(!purpose) return NULL;
   for(int c=0;c<7;c++){
-    int nw=3; if(!P_WORDS[c][2]) nw=2;
-    for(int w=0;w<nw;w++)
+    for(int w=0;w<6 && P_WORDS[c][w];w++)
       if(word_match(purpose,P_WORDS[c][w])) return P_CLASSES[c];
-    if(c==0 && word_match(purpose,"ammunition")) return "weapons";
+    if(c==0 && (word_match(purpose,"ammunition")||word_match(purpose,"municao")))
+      return "weapons";
   }
   return NULL; }
 
