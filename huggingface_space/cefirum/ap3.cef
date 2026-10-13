@@ -1,0 +1,66 @@
+# CEFIRUM CONFRONTATION 2 — max 3-AP-free subsets (family 159 lineage:
+# quasipolynomial bounds for arithmetic progressions)
+# Exhaustive DFS computes r3(N); the BEST set is recorded and then
+# independently re-verified to contain no 3-term arithmetic progression.
+
+BEST = arr(16)
+CNT = arr(1)
+
+fun ok_to_add(v, S) {
+  for y = 0 to v - 1 {
+    if S[y] != 0 {
+      x = 2 * y - v
+      if x >= 0 {
+        if S[x] != 0 { return 0 }
+      }
+    }
+  }
+  return 1
+}
+
+fun dfs(v, N, S, count) {
+  if v == N {
+    if count > CNT[0] {
+      CNT[0] = count
+      for i = 0 to N - 1 { BEST[i] = S[i] }
+    }
+    return 0
+  }
+  best = dfs(v + 1, N, S, count)
+  if ok_to_add(v, S) == 1 {
+    S[v] = 1
+    b2 = 1 + dfs(v + 1, N, S, count + 1)
+    S[v] = 0
+    if b2 > best { best = b2 }
+  }
+  return best
+}
+
+fun verify_set(N, S) {
+  for x = 0 to N - 1 {
+    if S[x] != 0 {
+      for y = x + 1 to N - 1 {
+        if S[y] != 0 {
+          z = 2 * y - x
+          if z < N {
+            if S[z] != 0 { return 0 }
+          }
+        }
+      }
+    }
+  }
+  return 1
+}
+
+print "CEFIRUM CONFRONTATION 2: r3(N), largest 3-AP-free subset, exhaustive"
+print "N    r3(N)   density(per mille)"
+for N = 8 to 16 {
+  S = arr(N)
+  CNT[0] = 0
+  best = dfs(0, N, S, 0)
+  assert best == CNT[0], "dfs/record disagreement"
+  assert verify_set(N, BEST) == 1, "recorded set contains a 3-AP"
+  dens = 1000 * best / N
+  print N, "  ", best, "   ", dens
+}
+print "VERIFIED: each reported set was re-checked independently, 3-AP-free"

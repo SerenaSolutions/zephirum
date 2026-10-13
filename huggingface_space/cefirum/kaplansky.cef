@@ -1,0 +1,141 @@
+# CEFIRUM CONFRONTATION 1 — Kaplansky direct finiteness, characteristic 2
+# Repo family: counterexamples to Kaplansky's direct-finiteness conjecture
+# (char 2 and odd char). The counterexamples must live in INFINITE groups;
+# finite groups are expected to be directly finite even over F2.
+# We exhaustively verify this boundary over ALL pairs (a,b) in F2[G],
+# for G = S3, Z6, Z7, Q8. If a*b == 1 then b*a must equal 1.
+
+fun alg_mul(a, b, n, mul) {
+  c = 0
+  for i = 0 to n - 1 {
+    if bitand(a, lshift(1, i)) != 0 {
+      for j = 0 to n - 1 {
+        if bitand(b, lshift(1, j)) != 0 {
+          g = mul[i][j]
+          c = bitxor(c, lshift(1, g))
+        }
+      }
+    }
+  }
+  return c
+}
+
+fun check_group(name, n, mul) {
+  m = pow(2, n)
+  hits = 0
+  viol = 0
+  for b = 0 to m - 1 {
+    u = arr(n)
+    for g = 0 to n - 1 {
+      u[g] = alg_mul(lshift(1, g), b, n, mul)
+    }
+    for a = 0 to m - 1 {
+      c = 0
+      for g = 0 to n - 1 {
+        if bitand(a, lshift(1, g)) != 0 { c = bitxor(c, u[g]) }
+      }
+      if c == 1 {
+        hits += 1
+        if alg_mul(b, a, n, mul) != 1 { viol += 1 }
+      }
+    }
+  }
+  print name, ": |F2[G]| =", m, ", pairs with a*b=1:", hits, ", violations:", viol
+  return viol
+}
+
+fun cyc(n) {
+  t = arr(n)
+  for i = 0 to n - 1 { t[i] = arr(n) }
+  for i = 0 to n - 1 {
+    for j = 0 to n - 1 { t[i][j] = (i + j) % n }
+  }
+  return t
+}
+
+# --- S3 from permutations of (0,1,2) ---
+fun build_s3() {
+  ps = arr(6)
+  for i = 0 to 5 { ps[i] = arr(3) }
+  pid = 0
+  for a = 0 to 2 {
+    for b = 0 to 2 {
+      for c = 0 to 2 {
+        if a != b {
+          if b != c {
+            if a != c {
+              ps[pid][0] = a
+              ps[pid][1] = b
+              ps[pid][2] = c
+              pid += 1
+            }
+          }
+        }
+      }
+    }
+  }
+  t = arr(6)
+  for i = 0 to 5 { t[i] = arr(6) }
+  for x = 0 to 5 {
+    for y = 0 to 5 {
+      z = -1
+      for tt = 0 to 5 {
+        ok = 1
+        for i = 0 to 2 {
+          if ps[tt][i] != ps[x][ps[y][i]] { ok = 0 }
+        }
+        if ok == 1 { z = tt }
+      }
+      t[x][y] = z
+    }
+  }
+  return t
+}
+
+# --- Q8 from quaternion unit algebra ---
+# id: 0:+1 1:-1 2:+i 3:-i 4:+j 5:-j 6:+k 7:-k
+fun build_q8() {
+  # unit product encoded as unit*2 + signbit ; units 0=1 1=i 2=j 3=k
+  q = arr(4)
+  for i = 0 to 3 { q[i] = arr(4) }
+  q[0][0] = 0
+  q[0][1] = 2
+  q[0][2] = 4
+  q[0][3] = 6
+  q[1][0] = 2
+  q[1][1] = 1
+  q[1][2] = 6
+  q[1][3] = 5
+  q[2][0] = 4
+  q[2][1] = 7
+  q[2][2] = 1
+  q[2][3] = 2
+  q[3][0] = 6
+  q[3][1] = 4
+  q[3][2] = 3
+  q[3][3] = 1
+  t = arr(8)
+  for i = 0 to 7 { t[i] = arr(8) }
+  for a = 0 to 7 {
+    if a <= 1 { ua = 0  sa = a } else { ua = (a - 2) / 2 + 1  sa = (a - 2) % 2 }
+    for b = 0 to 7 {
+      if b <= 1 { ub = 0  sb = b } else { ub = (b - 2) / 2 + 1  sb = (b - 2) % 2 }
+      e = q[ua][ub]
+      uu = e / 2
+      sbit = e % 2
+      s = bitxor(bitxor(sa, sb), sbit)
+      if uu == 0 { r = s } else { r = (uu - 1) * 2 + 2 + s }
+      t[a][b] = r
+    }
+  }
+  return t
+}
+
+print "CEFRUM CONFRONTATION 1: Kaplansky direct finiteness over F2, exhaustive"
+v = 0
+v += check_group("Z6", 6, cyc(6))
+v += check_group("Z7", 7, cyc(7))
+v += check_group("S3", 6, build_s3())
+v += check_group("Q8", 8, build_q8())
+assert v == 0, "direct finiteness violations found"
+print "VERDICT: 0 violations in", 64 * 64 + 128 * 128 + 64 * 64 + 256 * 256, "pairs — finite groups directly finite over F2 (boundary of the repo counterexample confirmed)"

@@ -1,0 +1,3 @@
+print ai_rag("CHSH classical limit")
+print ai_qnn(3, 7, 11, -2, 5, 9, 10, 0)
+print ai_ask("CHSH classical limit")

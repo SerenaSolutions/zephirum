@@ -1,0 +1,6 @@
+# CEFIRUM: quantum primitives wired to the Zephyrum QPU (SIMULATION MODE)
+bell = qpu_run("bell", 400)
+ghz = qpu_run("ghz", 600)
+print "bell pair via Zephyrum QPU:", bell
+print "ghz state via Zephyrum QPU:", ghz
+print "SIMULATION MODE — statevector backend, no physical QPU claimed"

@@ -1,0 +1,3 @@
+# CYCLE quantum primitive: entangled pair, straight from the language
+bell = qpu_run("bell", 400)
+print "entangled outcomes:", bell
