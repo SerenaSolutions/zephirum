@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "title": "ZYQL: A Trivalent-Decision Quantum Language with Pre-Registered, Signed Evidence Receipts (v1.0)",
+    "upload_type": "software",
+    "description": "Artifact release for the ZYQL quantum language (v1.3): formal EBNF grammar (ISO/IEC 14977) with operational semantics, C kernel with circuit IR and evidence receipts, pre-registered experimental campaigns on IBM Quantum hardware (Bell baseline; FRONTIER 001-003 causal discrimination of correlation decay; QLAB-002 end-to-end VQE of H2 from a compiled .zeph program, tripartite verification), raw hardware counts, verification scripts, and maturity-labeled reports. Authors: Ravi Dos Anjos (Serena Solutions). AI orchestration (agent Solene, Base44) acknowledged in methodology; all hardware claims point to published job identifiers.",
+    "creators": [{"name": "Dos Anjos, Ravi", "affiliation": "Serena Solutions"}],
+    "keywords": ["quantum programming languages", "quantum computing", "Hoeffding", "evidence receipts", "pre-registration", "VQE", "hydrogen molecule", "IBM Quantum", "no-cloning"],
+    "license": "mit",
+    "related_identifiers": [{"relation": "isSupplementTo", "identifier": "https://github.com/SerenaSolutions/zephirum", "resource_type": "software"}]
+  }
+}

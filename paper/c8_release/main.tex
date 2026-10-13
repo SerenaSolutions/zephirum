@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\title{ZYQL: A Trivalent-Decision Quantum Language with Pre-Registered, Signed Evidence Receipts --- Design, Formal Grammar, and End-to-End Validation on Superconducting Hardware}
+\author{Ravi Dos Anjos\\Serena Solutions\\S\~ao Paulo, Brazil}
+\date{October 13, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present ZYQL, a small quantum programming language whose distinguishing feature is an \emph{evidence discipline}: every execution passes a purpose gate, produces a trivalent verdict ($1$, $0$, or $\mathrm{REFUSED}$), and is recorded in a hash-chained receipt that is pre-registered before data collection. We specify the language through a formal ISO/IEC~14977 EBNF grammar and small-step operational semantics; notably, the no-cloning theorem (T1) is enforced \emph{syntactically}: a qubit binding may only be created from Dirac literals, never from another variable. We report a machine-validated grammar test battery (15/15), a compilation correctness proof by state fidelity ($F = 1.000000000000$ between the compiled circuit and the analytic target state), and two experimental campaigns on IBM Quantum superconducting processors: (i) a three-mission causal discrimination of error sources in Bell-correlation decay, culminating in a duration-matched experiment that identifies stochastic per-pulse error as the dominant mechanism ($z = +3.61$ against the duration hypothesis at matched circuit duration of $540\,\mathrm{dt}$); and (ii) the first end-to-end execution of a complete ZYQL program (variational energy estimation of $\mathrm{H_2}$) compiled from source and run on physical hardware (IBM \texttt{ibm\_fez}, Heron r2), with tripartite verification across exact statevector, calibrated noise simulation, and hardware. All claims in this paper are labeled by a four-state maturity scale (IMPLEMENTADO / EXPERIMENTAL / ESPECIFICA\c{C}\~AO / BLOQUEADO), and all deviations from preregistered acceptance criteria are reported, including a hardware VQE energy of $-0.9295 \pm 0.0105$ Ha versus an exact FCI value of $-1.136189$ Ha (deviation $0.2066$ Ha, unmitigated, versus a preregistered acceptance threshold of $0.20$ Ha). Raw counts, preregistration certificates, and job identifiers are published for full reproducibility.
+\end{abstract}
+
+\section{Introduction}
+Quantum programming languages and SDKs abound; epistemic discipline around claims about them does not. Implementations are frequently announced with the rhetorical weight of finished science: specifications are described as features, single-device demonstrations as guarantees. ZYQL began as a kernel and became a language precisely to resist this pattern. Three commitments define it:
+\begin{enumerate}
+\item \textbf{Trivalent decisions.} The language has no silent success path. The port\~ao $\langle|\rangle$ gate binds a declared purpose to a verdict in $\{1, 0, \mathrm{REFUSED}\}$; refusal is a first-class, signed outcome.
+\item \textbf{Evidence receipts.} Every execution is recorded with a SHA-256 hash chain; hypotheses, designs, and budgets are pre-registered (with certificate hashes) before data collection.
+\item \textbf{Maturity labels.} Every technical claim in our documentation and this paper carries one of four states: IMPLEMENTADO (code, test, recorded evidence), EXPERIMENTAL (demonstrated under stated conditions), ESPECIFICA\c{C}\~AO (defined, not implemented), or BLOQUEADO (must not be announced as functional).
+\end{enumerate}
+This paper is itself written under those rules. What we claim as established, we point to; what is partial, we say so.
+
+\section{The Language}
+ZYQL v1.3 is specified by a formal grammar in ISO/IEC 14977 EBNF (published as \texttt{grammar/zyql\_v13.ebnf} in the artifact repository) together with small-step operational semantics. A Lark parser implementing the grammar passes a 15/15 machine-validated battery: five canonical valid programs parse with clean semantics; seven malformed programs are rejected (including a cloning attempt, rejected \emph{syntactically}); three semantic violations are caught (non-unitary rewrite, use-after-collapse, unnormalized superposition).
+
+\subsection{Theorems as rules}
+Six theorems are realized as grammar productions and semantic checks:
+\begin{itemize}
+\item \textbf{T1 (no cloning), enforced syntactically.} The production for qubit declaration admits only Dirac ket literals, gated literals, or explicitly normalized superpositions. A qubit can never be born from another variable; the line \texttt{qbit b \textleftarrow a} is a parse error, not a runtime check.
+\item \textbf{T2 (unitary evolution).} Evolution statements require the left-hand side to equal the operand as a multiset (in-place aliasing): \texttt{q, r \textleftarrow CNOT \mytimes (q, r)}.
+\item \textbf{T3 (collapse boundary).} \texttt{medir} marks the target collapsed; any later evolution over it is refused by the semantic checker.
+\item \textbf{T4 (entanglement declaration).} CNOT application obligatorily declares the entangled pair in the receipt.
+\item \textbf{T5 (parameters).} $\theta$ is a first-class parameter; optimization (\texttt{otimizar}) is explicitly classical and auditable, outside the quantum kernel.
+\item \textbf{T6 (branching without collapse).} \texttt{qif} compiles to a CX (control, target); measurement is never implicit.
+\end{itemize}
+
+\subsection{Operational semantics}
+Transition rules are given in the artifact (small-step): binding from literals, normalization precondition ($\sum_i |\alpha_i|^2 = 1$), unitary evolution, entanglement side-condition on the receipt, CX compilation of branching, Born-rule measurement with collapse marking, classical parameter resolution, and the trivalent decision at gate closure.
+
+\section{Kernel and Evidence Protocol}
+The execution kernel is written in C (two layers: a circuit IR emitting OpenQASM 3, and a decision layer producing receipts with purpose classification and refusal-before-compute). The evidence protocol, used in all experiments below, is:
+\begin{enumerate}
+\item Pre-registration: hypotheses, design, acceptance criteria, and shot budgets are hashed before any collection.
+\item Gate: declared purpose; prohibited purposes are refused before compute (receipt records \texttt{REFUSED\_BEFORE\_COMPUTE}).
+\item Execution: hardware jobs on IBM Quantum (Open Plan), with job identifiers recorded.
+\item Verification: independent recomputation code paths must agree exactly; preregistered acceptance rules decide PASS/FAIL.
+\end{enumerate}
+We note an honest limitation: the current signature scheme is a Lamport-style one-time signature (PQ-PROTECT), correctly labeled as such after an internal audit; FIPS 204 (ML-DSA-44) remains ESPECIFICA\c{C}\~AO until implemented.
+
+\section{Experimental Evidence}
+All hardware results below were obtained on IBM Quantum superconducting processors (Heron r2, \texttt{ibm\_fez}), Open Plan.
+
+\subsection{Bell correlation baseline}
+A Bell $\Phi^+$ battery verified entanglement: $\langle ZZ\rangle = +0.874$, $\langle XX\rangle = +0.905$ (1024 shots per basis; job \texttt{db450d84qg6s73c1lcm0}).
+
+\subsection{Causal discrimination of correlation decay (three missions)}
+A depth-dependent decay of $\langle ZZ\rangle$ in paired-qubit batteries was decomposed causally across three pre-registered missions:
+\begin{enumerate}
+\item \emph{FRONTIER 001--002:} coherent-static and readout-correlation hypotheses refuted (echo recovery and readout matrices, respectively); a stochastic per-pulse model survived; a confound was declared between pulse count and circuit duration.
+\item \emph{FRONTIER 003:} the language gained a \texttt{delay} primitive (IR v4) to construct a duration-matched pair: a 3-pulse circuit with idle delay (total $540\,\mathrm{dt}$) versus a 35-pulse HH-depth circuit (same $540\,\mathrm{dt}$; base Bell $444\,\mathrm{dt}$; $dt = 4\,\mathrm{ns}$). On hardware (2048 shots per circuit, job \texttt{db5qqb4lf4us73c5gglg}): the delay circuit retained $\langle ZZ\rangle = +0.949$ versus $+0.907$ for the pulse-depth circuit at identical duration; $z = -1.15$ (delay vs.\ base Bell) and $z = +3.61$ (delay vs.\ depth), deciding by the preregistered rule in favor of stochastic per-pulse error and against duration coupling.
+\end{enumerate}
+The campaign also documented systematic underestimation of circuit noise by the calibrated Aer noise model, a finding consistent across all missions.
+
+\subsection{End-to-end program execution: VQE of $\mathrm{H_2}$ (QLAB-002)}
+A complete ZYQL program (\texttt{h2.zeph}) --- purpose gate, Hartree--Fock preparation, two-configuration ansatz $R_y(\theta)$ plus three CNOTs, classical $\theta$ optimization, trivalent decision --- was compiled from source through the kernel IR to OpenQASM 3 and executed on \texttt{ibm\_fez} in two pre-registered stages (61{,}440 shots total; jobs \texttt{db6k5e4lf4us73c5gglg}, \texttt{db6kassvf2bc73d1ca0g}). The Hamiltonian was \emph{computed} (not transcribed): $\mathrm{H_2}$, STO-3G, $R = 0.735$\,\AA, Jordan--Wigner, 15 Pauli terms on 4 qubits; exact FCI ground energy $E_0 = -1.1361891625$ Ha by local diagonalization.
+
+\textbf{Compilation proof (A2):} the state prepared by the compiled circuit matches the analytic target $\cos(\theta/2)|\mathrm{HF}\rangle + \sin(\theta/2)|\mathrm{exc}\rangle$ with fidelity $1.000000000000$.
+
+\textbf{Ansatz validity (A3):} exact statevector VQE minimum $-1.136145$ Ha; gap to FCI $4.45\times10^{-5}$ Ha.
+
+\textbf{Hardware tripartition:} energies were reconstructed at 12 points from hardware counts (two independent counting implementations agreed exactly). The hardware curve locates the minimum in the correct region (preregistered A7: PASS), with a minimum hardware energy of $-0.9295 \pm 0.0105$ Ha at $\theta = 6.1276$ rad. Deviation from FCI: $0.2066$ Ha, \emph{unmitigated} --- this \emph{failed} our preregistered $\le 0.20$ Ha acceptance criterion by $0.0066$ Ha and is reported as such. The measured amplitude damping ($\sim$80\% of correlation signal) is consistent with the per-pulse error mechanism established in Section 4.2.
+
+\section{Related Work}
+Compared with Q\#, Silq, Quipper, and QCL, ZYQL's verified delta is narrow and specific: (i) refusal as a signed, first-class verdict (where others fail or assert on invalid input, ZYQL returns a receipt); (ii) purpose gating before compute; (iii) preregistered, hash-chained evidence receipts as a language-level artifact; (iv) no-cloning enforced by the grammar rather than by runtime checks. We are explicit that on ecosystem, type richness, uncomputation, and optimization these systems are superior; ZYQL's contribution is epistemic, not scale.
+
+\section{Limitations}
+\begin{enumerate}
+\item No error mitigation was applied; hardware energies are damped by uncorrelated per-pulse noise.
+\item The calibrated Aer model underestimates hardware noise for the depth used (29/60 circuits within $3\sigma$); simulation bands are indicative, not guarantees.
+\item Universality (expressiveness equivalence with the circuit model) is established as a construction in both directions in the artifact documentation; a machine-checked proof (e.g., Lean) is future work.
+\item The signature layer is a Lamport-style OTS; FIPS 204 is not yet implemented and is labeled accordingly.
+\end{enumerate}
+
+\section{Data Availability}
+All grammars, semantics documents, kernels, preregistration certificates, raw hardware counts, verification scripts, and reports are published at \texttt{https://github.com/SerenaSolutions/zephirum} (see \texttt{grammar/}, \texttt{experiments/frontier\_003/}, \texttt{experiments/qlab\_c6\_h2/}). IBM Quantum job identifiers are listed in the text and artifacts for independent retrieval.
+
+\end{document}
