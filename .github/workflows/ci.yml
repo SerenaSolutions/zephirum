@@ -28,3 +28,7 @@ jobs:
         run: |
           pip install pqcrypto -q
           python3 products/sentinel/test_sentinel.py
+      - name: DOT Agent MVP battery (computer + policy + receipts)
+        run: |
+          pip install pqcrypto -q
+          python3 products/dot/test_dot.py
