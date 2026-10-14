@@ -1,0 +1,135 @@
+[
+ {
+  "job_id": "db73rcimb58s738cpb40",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 14:18:26.815632+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "00": 89,
+    "01": 100,
+    "10": 120,
+    "11": 91
+   }
+  ]
+ },
+ {
+  "job_id": "db73rcklf4us73db9kag",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 14:18:26.089114+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "00": 34,
+    "01": 53,
+    "10": 294,
+    "11": 19
+   }
+  ]
+ },
+ {
+  "job_id": "db71gvslf4us73db4hn0",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 11:39:43.971672+00:00",
+  "status": "DONE",
+  "n_circuitos": 2,
+  "counts": [
+   {
+    "00": 1031,
+    "01": 6,
+    "10": 21,
+    "11": 990
+   },
+   {
+    "00": 1038,
+    "01": 16,
+    "10": 13,
+    "11": 981
+   }
+  ]
+ },
+ {
+  "job_id": "db71gkcvf2bc73d21er0",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 11:38:57.225453+00:00",
+  "status": "DONE",
+  "n_circuitos": 2,
+  "counts": [
+   {
+    "00": 1011,
+    "01": 18,
+    "10": 13,
+    "11": 1006
+   },
+   {
+    "00": 483,
+    "01": 564,
+    "10": 594,
+    "11": 407
+   }
+  ]
+ },
+ {
+  "job_id": "db70ticlf4us73db3c6g",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 10:58:17.572692+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "00": 995,
+    "01": 17,
+    "10": 12,
+    "11": 1024
+   }
+  ]
+ },
+ {
+  "job_id": "db70tgqmb58s738cj8o0",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 10:58:11.498653+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "00": 1016,
+    "01": 38,
+    "10": 14,
+    "11": 980
+   }
+  ]
+ },
+ {
+  "job_id": "db70tfg4qg6s73c5im40",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 10:58:06.114179+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "000": 1,
+    "001": 3,
+    "011": 28,
+    "101": 39,
+    "110": 25,
+    "111": 1952
+   }
+  ]
+ },
+ {
+  "job_id": "db70tdslf4us73db3bqg",
+  "backend": "ibm_fez",
+  "criado_utc": "2026-10-13 10:57:59.337122+00:00",
+  "status": "DONE",
+  "n_circuitos": 1,
+  "counts": [
+   {
+    "000": 2046,
+    "001": 1,
+    "010": 1
+   }
+  ]
+ }
+]

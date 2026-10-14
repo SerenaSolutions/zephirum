@@ -32,3 +32,8 @@ jobs:
         run: |
           pip install pqcrypto -q
           python3 products/dot/test_dot.py
+      - name: Scientific conformance suite (v0.3 standard + falsification)
+        run: |
+          pip install ./plugin -q
+          python3 prototype/conformance_v03.py
+          python3 prototype/falsification_200.py
