@@ -24,3 +24,7 @@ jobs:
           for p in hello bell selftest kaplansky divisor quantum test_ai; do
             python3 cefirum.py run $p.cef > /dev/null || exit 1
           done
+      - name: ZYQL Sentinel + ProofChain product battery (P1+P3 MVP)
+        run: |
+          pip install pqcrypto -q
+          python3 products/sentinel/test_sentinel.py
