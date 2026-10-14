@@ -19,7 +19,7 @@ jobs:
           /tmp/test_chain
       - name: ZEPHIRUM language regression (6/6 + AI builtins)
         run: |
-          pip install numpy -q
+          pip install numpy pqcrypto -q
           cd quantum_language/cefirum
           for p in hello bell selftest kaplansky divisor quantum test_ai; do
             python3 cefirum.py run $p.cef > /dev/null || exit 1

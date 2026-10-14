@@ -25,7 +25,7 @@ jobs:
               r = run(f"cc -O2 -o /tmp/{t} c-api/zyql.c c-api/tests/{t}.c -lm && /tmp/{t}")
               r["battery"] = t
               results.append(r)
-          py = run("pip install numpy -q && cd quantum_language/cefirum && "
+          py = run("pip install numpy pqcrypto -q && cd quantum_language/cefirum && "
                    "for p in hello bell selftest kaplansky divisor quantum test_ai; do "
                    "python3 cefirum.py run $p.cef > /dev/null || exit 1; done")
           py["battery"] = "zephirum_language_regression_6+1"
@@ -36,6 +36,8 @@ jobs:
               "results": results,
               "summary": {r["battery"]: ("PASS" if r["rc"] == 0 else "FAIL") for r in results},
           }
+          import os as _os
+          _os.makedirs("science_log", exist_ok=True)
           fname = "science_log/" + entry["ts_utc"][:10] + ".jsonl"
           with open(fname, "a") as f:
               f.write(json.dumps(entry) + "\n")
