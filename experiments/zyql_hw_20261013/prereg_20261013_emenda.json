@@ -1,0 +1,11 @@
+{
+  "tipo": "EMENDA POS-FACTO (§12 honesto)",
+  "missao": "Arquivamento de 8 jobs QPU executados em 2026-10-13 no ibm_fez sem pre-registro hashado anterior",
+  "lacuna_declarada": "Estes jobs foram coletados SEM pre-registro em arquivo antes da coleta — violacao da regra da casa. Sao arquivados agora com dados brutos intactos e NENHUMA alegacao cientifica anexada. O protocolo de pre-registro permanece obrigatoria para toda coleta futura.",
+  "data_emenda": "2026-10-14",
+  "jobs": ["db73rcimb58s738cpb40", "db73rcklf4us73db9kag", "db71gvslf4us73db4hn0",
+           "db71gkcvf2bc73d21er0", "db70ticlf4us73db3c6g", "db70tgqmb58s738cj8o0",
+           "db70tfg4qg6s73c5im40", "db70tdslf4us73db3bqg"],
+  "rotulo_maturidade": "EXPERIMENTAL — SEM PRE-REGISTRO",
+  "orcamento": "ja consumido no hardware: 4x2048 + 2x(2x2048) + 2x400 = 13.520 tiros"
+}
