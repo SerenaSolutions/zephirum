@@ -1,0 +1,47 @@
+{
+  "protocol": "DOT/0.1",
+  "note": "Política declarada do DOT AGENT. Ferramentas com risco 'high' exigem aprovação humana registrada; conteúdo de arquivos e documentos NUNCA altera esta política (anti prompt-injection).",
+  "tools": {
+    "write_file": {
+      "risk": "medium",
+      "requires_evidence": [],
+      "condition": {
+        "rule": "not_startswith",
+        "field": "path",
+        "value": "."
+      },
+      "description": "escreve arquivo DENTRO do workspace isolado"
+    },
+    "read_file": {
+      "risk": "low",
+      "requires_evidence": [],
+      "condition": null,
+      "description": "lê arquivo do workspace"
+    },
+    "run_command": {
+      "risk": "medium",
+      "requires_evidence": [
+        "plan"
+      ],
+      "condition": null,
+      "description": "terminal controlado (allowlist interna do DotComputer)"
+    },
+    "publish_external": {
+      "risk": "high",
+      "requires_evidence": [
+        "plan",
+        "human_approval"
+      ],
+      "condition": null,
+      "description": "publicação fora do workspace — exige humano"
+    },
+    "delete_workspace": {
+      "risk": "high",
+      "requires_evidence": [
+        "human_approval"
+      ],
+      "condition": null,
+      "description": "destruição — exige humano"
+    }
+  }
+}
