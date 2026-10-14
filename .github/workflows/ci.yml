@@ -37,3 +37,4 @@ jobs:
           pip install ./plugin -q
           python3 prototype/conformance_v03.py
           python3 prototype/falsification_200.py
+          python3 prototype/test_sparse_verify.py
