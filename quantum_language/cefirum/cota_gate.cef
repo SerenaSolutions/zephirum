@@ -1,0 +1,55 @@
+# ZYKL DECISION KATA — o portao de cotas (teste da situacao-tipo)
+#
+# Origem: MISSAO ABORTADA. Os katas anteriores vinham de pesquisas divulgadas
+# em redes sociais, de autores que ja dominam o assunto (conhecimento de
+# catedra). Decisao do fundador: abortar essa missao e gerar UM teste novo
+# sobre o TIPO de situacao — um pedido de computacao aparentemente grande
+# batendo no portao de decisao antes de qualquer execucao — com cenario
+# proprio da casa, sem citar trabalho alheio.
+#
+# Semantica trivalente da casa exercitada nas QUATRO saidas:
+#   1       -> pode computar (pedido dentro da cota declarada)
+#   0       -> decidido negativo SEM execucao (eliminacao: forma fechada
+#              ou condicao ja conhecida — nao ha o que computar)
+#   REFUSED -> recusado (excede a cota; nao ha autorizacao p/ executar)
+#   UNKNOWN -> pre-registro incompleto ou ambiguo (nao se decide no escuro)
+# Maturidade: IMPLEMENTADO (logica do portao). Nenhuma alegacao fisica.
+
+fun log2_binom(n, k) {
+  s = 0
+  for i = 0 to k - 1 {
+    s += ln(n - i) - ln(i + 1)
+  }
+  return s / ln(2)
+}
+
+fun portao(dim_log2, cota, forma_fechada, declarado) {
+  if declarado != 1 { return "UNKNOWN" }
+  if forma_fechada == 1 { return 0 }
+  if dim_log2 <= cota { return 1 }
+  return "REFUSED"
+}
+
+COTA = 40   # log2 do orcamento de determinantes declarado pela casa
+
+# Pedido A: espaco ativo de 14 eletrons (28 spin-orbitais): cabe na cota.
+a = portao(log2_binom(28, 14), COTA, 0, 1)
+# Pedido B: somar termos com forma fechada conhecida: eliminado SEM computar.
+b = portao(0, COTA, 1, 1)
+# Pedido C: espaco ativo de 60 eletrons (120 spin-orbitais): excede a cota.
+c = portao(log2_binom(120, 60), COTA, 0, 1)
+# Pedido D: pedido sem pre-registro de dimensao: nao se decide no escuro.
+d = portao(0, COTA, 0, 0)
+
+print "Pedido A (14e ativos)    -> ", a
+print "Pedido B (forma fechada) -> ", b
+print "Pedido C (60e ativos)    -> ", c
+print "Pedido D (nao declarado) -> ", d
+
+assert a == 1, "A: dentro da cota — pode computar"
+assert b == 0, "B: eliminado por forma fechada — 0 sem execucao"
+assert c == "REFUSED", "C: recusado por cota"
+assert d == "UNKNOWN", "D: pre-registro incompleto"
+
+print "KATA PASS — os quatro vereditos da casa exercitados (1, 0, REFUSED, UNKNOWN)"
+print "decididos ANTES de qualquer COMPUTE. ASK FIRST. PROVE NEXT. COMPUTE LAST."
