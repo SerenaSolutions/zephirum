@@ -2,8 +2,9 @@ cff-version: 1.2.0
 message: "If you use this artifact, please cite it as below."
 title: "ZYQL: A Trivalent-Decision Quantum Language with Pre-Registered, Signed Evidence Receipts"
 authors:
-  - family-names: "Dos Anjos"
-    given-names: "Ravi"
+  - family-names: "Uhlmann"
+    given-names: "Reginaldo Pinezi"
+    orcid: "https://orcid.org/0009-0005-3212-5179"
 type: software
 identifiers:
   - type: doi
