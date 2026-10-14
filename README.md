@@ -448,3 +448,20 @@ product. The VM was built INSIDE the Runtime (Phase 6). Full spec:
 - Charter and concept: published here for public anteriority (2026-10-06)
 
 © 2026 Serena Solutions. Authorship and dates provable by Git history.
+
+## Help us grow
+
+If ZEPHIRUM's honesty contract (trivalent verdicts + ML-DSA-44 receipts on every
+decision) matters to you, **star this repository** — it is how independent
+language projects get discovered.
+
+Ways to contribute (see [CONTRIBUTING.md](CONTRIBUTING.md)):
+
+1. Grab a `good first issue` — portgate word lists in your language, spec
+   drafting, docs. Start here: issues labeled `good first issue`.
+2. Run the batteries yourself (`make -C src`, `cc -O2 -o /tmp/t c-api/zyql.c
+   c-api/tests/test_chain.c -lm && /tmp/t`) and post your results.
+3. Join Discussions: design debates on the trivalent gate, the quantum
+   control flow (`qif`), and the science log are all open.
+
+Every merged contribution lands with a receipt in `science_log/`.
