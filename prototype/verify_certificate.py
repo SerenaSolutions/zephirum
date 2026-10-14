@@ -56,6 +56,8 @@ _EV_WHITELIST = {
     "FULL_SUM": {"full_sum", "op", "threshold"},
     "FULL_DET": {"det", "op", "threshold"},
     "MEDIAN_CLASSICAL": {"sorted", "median", "op", "threshold"},
+    "SPARSE_RECURSIVE_FLATTEN_RANK": {"n_qubits", "support",
+                                      "fully_separable", "op", "threshold"},
     "SCHMIDT_DET_CRITERION": {"amplitudes", "det", "norm_sq", "concurrence",
                               "op", "threshold"},
 }
@@ -293,6 +295,72 @@ def _verify_core(blocks, cert):
         if not _eq(med, ev.get("median")) or cmp(med, op, thr) != answer:
             return False, "REJECT: median mismatch"
         return True, "ok: median recomputed independently"
+
+    if k == "SPARSE_RECURSIVE_FLATTEN_RANK":
+        # Rota INDEPENDENTE do motor (audit achado 11): o motor usa a recursão
+        # de achatamento qubit-a-qubit; aqui o verificador usa o teorema do
+        # posto — estado totalmente separavel <=> posto 1 em TODO corte
+        # k|N-k (k=1..N-1) — decidido por menores 2x2 exatos (Fraction).
+        # Sem contar com a evidência declarada: re-deriva da FONTE.
+        import re as _re2
+        from fractions import Fraction as _Fr
+        m2 = _re2.match(r"sparse\((\d+)\)\s*(.*)$", model.get("state", ""))
+        if not m2:
+            return False, "REJECT: sparse source malformed"
+        nq = int(m2.group(1)); body = m2.group(2).strip()
+        if not (1 <= nq <= 64):
+            return False, "REJECT: sparse N out of declared scope"
+        ents = []
+        for tok in body.split(","):
+            tok = tok.strip()
+            if not tok:
+                continue
+            if ":" not in tok:
+                return False, "REJECT: sparse entry without idx:amp"
+            i_s, a_s = tok.split(":", 1)
+            ents.append((int(i_s), _Fr(a_s)))
+        ents = [(i, a) for i, a in ents if a != 0]
+        if not ents:
+            return False, "REJECT: zero state is not a quantum state"
+        if int(ev.get("support", -1)) != len(ents) or int(ev.get("n_qubits", -1)) != nq:
+            return False, "REJECT: sparse evidence diverges from source"
+        fully_sep = True
+        for cut in range(1, nq):
+            low = nq - cut
+            mask = (1 << low) - 1
+            M = {}
+            rows = {}
+            for i, a in ents:
+                r, c = i >> low, i & mask
+                M[(r, c)] = a
+                rows.setdefault(r, []).append(c)
+            rl = sorted(rows)
+            for x in range(len(rl)):
+                for y in range(x + 1, len(rl)):
+                    r1, r2 = rl[x], rl[y]
+                    for c1 in rows[r1]:
+                        for c2 in rows[r2]:
+                            if c1 == c2:
+                                continue
+                            if (M[(r1, c1)] * M.get((r2, c2), _Fr(0)) !=
+                                    M.get((r1, c2), _Fr(0)) * M.get((r2, c1), _Fr(0))):
+                                fully_sep = False
+                                break
+                        if not fully_sep:
+                            break
+                    if not fully_sep:
+                        break
+                if not fully_sep:
+                    break
+            if not fully_sep:
+                break
+        if bool(ev.get("fully_separable")) != fully_sep:
+            return False, "REJECT: separability disagrees with independent rank check"
+        value = 0 if fully_sep else 1
+        if cmp(value, op, thr) != answer:
+            return False, "REJECT: answer inconsistent with independent verdict"
+        return True, ("ok: sparse separability cross-checked by rank-1 minors "
+                      "over all %d cuts (independent of engine recursion)" % (nq - 1))
 
     if k == "SCHMIDT_DET_CRITERION":
         toks = [x.strip() for x in model["state"].split(",")]
