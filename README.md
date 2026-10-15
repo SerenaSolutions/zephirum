@@ -449,6 +449,14 @@ product. The VM was built INSIDE the Runtime (Phase 6). Full spec:
 
 © 2026 Serena Solutions. Authorship and dates provable by Git history.
 
+## What ZEPHIRUM is (and is not)
+
+ZEPHIRUM is a language — and ZYQL is the product: a trivalent decision
+layer (1 / 0 / REFUSED, receipts signed) that any other language, stack or
+service can embed as a plugin via the zero-dependency C core. We do not
+compete with quantum languages; we decide for them.
+See [docs/DECISION_LAYER.md](docs/DECISION_LAYER.md).
+
 ## Help us grow
 
 If ZEPHIRUM's honesty contract (trivalent verdicts + ML-DSA-44 receipts on every
