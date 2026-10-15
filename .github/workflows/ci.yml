@@ -21,7 +21,7 @@ jobs:
         run: |
           pip install numpy pqcrypto -q
           cd quantum_language/cefirum
-          for p in hello bell selftest kaplansky divisor quantum test_ai cota_gate dark_matter periodic_table; do
+          for p in hello bell selftest kaplansky divisor quantum test_ai cota_gate dark_matter periodic_table qml_confrontation; do
             python3 cefirum.py run $p.cef > /dev/null || exit 1
           done
       - name: ZYQL Sentinel + ProofChain product battery (P1+P3 MVP)
