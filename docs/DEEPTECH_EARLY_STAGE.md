@@ -43,3 +43,10 @@ Microsoft Founders Hub (up to US$150k Azure credits, no equity) · NVIDIA Incept
 Regra Zero (audit before proposing) · no fabricated results · QPU runs
 pre-registered + budgeted + maturity-labeled · signed commits · the internal
 competitive finding from the 12-language audit stays private (never published).
+
+## Hardware access (declared, no ownership claim)
+All real-QPU receipts were produced on IBM Quantum's **Open Plan** — the free
+public tier for scientific research. We do not own, operate, or hold any
+partnership with the hardware provider. Hardware is cited strictly as a
+test laboratory in every public piece (vendor-neutral QUANTUM HARDWARE
+BRIDGE). No endorsement in either direction is claimed or implied.
