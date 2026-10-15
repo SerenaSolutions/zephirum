@@ -1,0 +1,35 @@
+[
+ {
+  "job_id": "db81evmil99s73fp3i2g",
+  "backend": "ibm_fez",
+  "status": "DONE",
+  "counts": {
+   "11": 184,
+   "00": 197,
+   "01": 5,
+   "10": 14
+  }
+ },
+ {
+  "job_id": "db81f02raffc73fbgo50",
+  "backend": "ibm_marrakesh",
+  "status": "DONE",
+  "counts": {
+   "00": 154,
+   "11": 156,
+   "01": 32,
+   "10": 58
+  }
+ },
+ {
+  "job_id": "db81f0araffc73fbgo6g",
+  "backend": "ibm_kingston",
+  "status": "DONE",
+  "counts": {
+   "11": 171,
+   "01": 69,
+   "10": 49,
+   "00": 111
+  }
+ }
+]

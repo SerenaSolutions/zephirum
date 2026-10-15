@@ -1,0 +1,3 @@
+{"job_id": "db81evmil99s73fp3i2g", "backend": "ibm_fez", "shots": 400, "status": "COLETADO", "p00": 197, "p11": 184, "correlacao_pct": 95.25, "veredito": "BELL_OK"}
+{"job_id": "db81f02raffc73fbgo50", "backend": "ibm_marrakesh", "shots": 400, "status": "COLETADO", "p00": 154, "p11": 156, "correlacao_pct": 77.5, "veredito": "BELL_OK"}
+{"job_id": "db81f0araffc73fbgo6g", "backend": "ibm_kingston", "shots": 400, "status": "COLETADO", "p00": 111, "p11": 171, "correlacao_pct": 70.5, "veredito": "BELL_OK"}
