@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: BSL-1.1 (Serena Quantum Solutions) — see LICENSE-BSL. Commercial production use requires a license. */
 /* zyql.c — ZYQL verified-decision core, single-file amalgamation v0.1.0
  * C99, no dependencies. Parity-tested against prototype/nexa_core.py.
  * The purpose string is DATA, never executed (structural purity). */

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: BSL-1.1 (Serena Quantum Solutions) — see LICENSE-BSL. Commercial production use requires a license. */
 #ifndef ZYQL_H
 #define ZYQL_H
 #include <stddef.h>

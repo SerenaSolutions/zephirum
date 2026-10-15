@@ -1,0 +1,24 @@
+Business Source License 1.1
+
+Licensor: Serena Quantum Solutions (CNPJ 69.317.058/0001-60)
+
+Licensed Work: the ZQ-GATE decision core — the directory `c-api/` (zyql.c, zyql.h
+and their tests) and the directory `plugin/` — including all future versions of
+these directories on this repository's main branch.
+
+Change Date: 2030-10-15
+
+Change License: MIT
+
+Additional Use Grant: You may use, copy, modify and evaluate the Licensed Work
+for research, personal, educational, and non-production purposes, including
+running the test batteries and benchmarks. Any use of the Licensed Work as part
+of a commercial product, hosted production service, or internal business
+automation requires a separate commercial license from the Licensor.
+
+Terms: The Licensor grants a worldwide, non-exclusive, non-transferable
+license to use the Licensed Work for the Additional Uses stated above, subject
+to the terms of the Business Source License 1.1 (https://mariadb.com/bsl11/).
+On the Change Date the Licensed Work becomes available under the Change License.
+Notices: The Licensed Work is provided "AS IS", WITHOUT WARRANTY OF ANY KIND.
+This is a summary-form license text; the full BSL 1.1 terms apply.
