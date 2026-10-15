@@ -1,0 +1,66 @@
+# ZYKL DECISION KATA — as fronteiras do conhecivel: do atomo ao horizonte cosmico
+#
+# Fontes primarias (nenhuma divulgacao social):
+#  [1] Planck Collaboration, A&A 641, A6 (2020) — curvatura Omega_k = 0.001 +- 0.002
+#  [2] T. M. Davis e C. H. Lineweaver, "Expanding Confusion", arXiv:astro-ph/0310808
+#      (2004) — horizonte de eventos cosmico ~16 Gly de distancia propria
+#  [3] ODNI, "Preliminary Assessment: Unidentified Aerial Phenomena" (2021) —
+#      144 relatos, 1 explicado
+#  [4] NASA UAP Independent Study Team, relatorio final (2023) — nenhum caso
+#      com origem extraterrestre verificada; dados insuficientes
+#  [5] CODATA 2018 — raio de Bohr a0 = 0.529 Angstrom (52900 fm)
+#  [6] NASA/JPL — Voyager 1: ~17 km/s
+#
+# A "verdade" que a casa busca: um MAPA DO DECIDIVEL. A linguagem nao inventa
+# o desconhecido — ela computa o que a fisica permite decidir e carimba o que
+# e incognoscivel POR PRINCIPIO. Vereditos trivalentes + UNKNOWN em cada fronteira.
+# Maturidade: IMPLEMENTADO (calculos, aritmetica inteira); ESPECIFICACAO
+# (interpretacoes, todas rotuladas e refutaveis).
+
+# ---------- (1) o universo alem do observavel, pela curvutura de Planck ----------
+RH = 14400            # raio de Hubble em Mly (14.4 Gly), cosmologia padrao
+inv_sqrt = isqrt(500) # piso de sqrt(1/0.002): 22
+Rc = RH * inv_sqrt     # limite INFERIOR do raio de curvatura do universo
+OBS = 46500           # raio do universo observavel em Mly (46.5 Gly)
+
+print "raio do universo observavel: ", OBS, "Mly (46.5 Gly; diametro ~93 Gly)"
+print "limite inferior do raio do universo (curvatura Planck [1]): ", Rc, "Mly"
+ratio10 = Rc * 10 / OBS
+print "o universo e PELO MENOS ", ratio10, "decimos do observavel (~6.8x) — decidido: 1"
+assert Rc > 6 * OBS, "universo no minimo ~7x maior que o observavel"
+
+# ---------- (2) o horizonte de eventos: a fronteira do PERPETUAMENTE incognoscivel ----------
+EH = 16000            # ~16 Gly [2]
+print "galaxias alem de ", EH, "Mly: a luz delas NUNCA chegara aqui (expansao acelerada)"
+print "VEREDITO sobre o conteudo alem do horizonte de eventos: UNKNOWN permanente"
+print "— nao e falta de esforco: e principio fisico. Verdade honesta: NAO SABEMOS e nao saberei por observacao"
+
+# ---------- (3) bolhas-universo (inflacao eterna) ----------
+print "bolhas-universo vizinhas: sem conexao causal com esta bolha"
+print "VEREDITO: REFUSED — fora do dominio verificavel; a casa recusa decidir o indecidivel"
+
+# ---------- (4) UAP/OVNI: os dados primarios, sem lenda ----------
+relatos = 144
+explicados = 1
+verificados_extraterrestres = 0
+print "ODNI 2021 [3]: ", relatos, "relatos, ", explicados, "explicado, ", relatos - explicados, "sem explicacao"
+print "NASA 2023 [4]: ", verificados_extraterrestres, "casos verificados como extraterrestres"
+assert verificados_extraterrestres == 0, "dado primario: zero casos verificados"
+print "VEREDITO sobre 'naves alienigenas': UNKNOWN — dados insuficientes; sem evidencia nao existe verdade"
+
+# ---------- (5) o atomo: a escala que a materia revela ----------
+a0_fm = 52900         # raio de Bohr em fm [5]
+nucleo_fm = 10        # nucleo tipico pesado em fm
+escala = a0_fm / nucleo_fm
+print "atomo/nucleo: ", escala, "x — nucleo de 1 cm ⇒ atomo de ", escala / 100, "m"
+assert escala > 5000, "o atomo e vazio em mais de 5000:1"
+
+# ---------- (6) a escala interestelar que separa nos das lendas ----------
+dkm = 40170000000000  # Proxima Centauri em km (~4.25 ly)
+t = dkm / 17 / 31557600
+print "voyager ate a estrela mais proxima [6]: ", t, "anos de viagem"
+assert t > 70000, "com tecnologia atual, decadas-milenios de distancia"
+
+print "KATA PASS — mapa do decidivel completo: 1 (cosmos maior que o observavel),"
+print "UNKNOWN (horizonte; UAP), REFUSED (bolha-multiverso), 0 lendas fabricadas."
+print "ASK FIRST. PROVE NEXT. COMPUTE LAST."
