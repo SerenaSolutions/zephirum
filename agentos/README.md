@@ -19,3 +19,10 @@ Run the demo: `python3 agentos/agentos.py`
 
 Internal-use tooling of Serena Quantum Solutions. Hardware submission
 happens only through the gate (QUANTUM HARDWARE BRIDGE).
+
+## v0.3.0 — 6th agent + real hardware route
+- LEODOT: the permanent dot workforce plugged as the 6th agent (supervised process).
+- BRIDGE: real hardware submission happens ONLY through a gate verdict of 1,
+  with hashed pre-registration, declared shot budget and EXPERIMENTAL maturity
+  label (house rules). Prohibited purpose => hardware never touched.
+- Credentials via env only (QPU_API_KEY / QPU_BACKEND). Vendor-neutral bridge.

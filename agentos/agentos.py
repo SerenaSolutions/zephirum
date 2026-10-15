@@ -21,8 +21,8 @@ PROHIBITED = {"weapon","gun","explosive","arma","armas","lethal","kill","matar",
 
 def boot():
     print("∞ = |0⟩ + |1⟩")
-    print("ZEPHYRIUM OS · AGENT OS · v0.2.0-agent · CODENAME HORIZON")
-    print("boot: kernel ok · language ok · gate ok · agents 5/5 · SIMULATION MODE")
+    print("ZEPHYRIUM OS · AGENT OS · v0.3.0-agent · CODENAME HORIZON")
+    print("boot: kernel ok · language ok · gate ok · agents 6/6 (+ dot workforce) · SIMULATION MODE")
     print("─" * 62)
 
 class Modeler:
@@ -107,3 +107,73 @@ if __name__ == "__main__":
              "research entanglement statistics", shots=600)
     print("\n=== RUN 2: prohibited purpose (gate must refuse) ===")
     pipeline("X", "generate counterfeit banknotes for fraud", dry_run=False)
+
+
+# ============== v0.3.0: 6th agent (permanent dot workforce) + real QPU route ==============
+class Leodot:
+    """6th agent: the house dot, permanent workforce of the OS."""
+    def heartbeat(self):
+        try:
+            r = subprocess.run(["ps", "aux"], capture_output=True, text=True, timeout=10)
+            alive = "leo_dot.py" in (r.stdout or "")
+        except Exception:
+            alive = False
+        audit("LEODOT", "permanent workforce plugged · dot process " + ("ALIVE" if alive else "will be respawned by supervisor"))
+        return alive
+
+class Bridge:
+    """Real hardware submission route — ONLY through a gate verdict of 1.
+    House rules enforced: hashed pre-registration, declared shot budget, maturity label."""
+    def submit(self, circuit_qasm, purpose, shots=400):
+        backend = os.environ.get("QPU_BACKEND", "ibm_marrakesh")
+        sha = hashlib.sha256(circuit_qasm.encode()).hexdigest()
+        pre = {"circuit_sha256": sha, "shots_declared": shots, "backend": backend,
+               "purpose": purpose, "maturity_label": "EXPERIMENTAL",
+               "ts_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+        pre_hash = hashlib.sha256(json.dumps(pre, sort_keys=True).encode()).hexdigest()
+        Z.receipt("AGENTOS_preregister", "EVIDENCE-D-PREREGISTER", source="zephyrium agent os bridge",
+                  pre=pre, pre_hash=pre_hash, zyql_decision="1")
+        audit("BRIDGE", f"pre-registered | sha {pre_hash[:16]}... | shots={shots} | maturity=EXPERIMENTAL")
+        token = os.environ.get("QPU_API_KEY") or os.environ.get("API_KEY")
+        if not token:
+            audit("BRIDGE", "no hardware credentials in env -> staying in SIMULATION MODE")
+            return None
+        from qiskit import transpile
+        from qiskit.qasm3 import loads as qasm3_loads
+        from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
+        svc = QiskitRuntimeService(token=token, channel="ibm_quantum_platform")
+        bk = svc.backend(backend)
+        qc = transpile(qasm3_loads(circuit_qasm), backend=bk, optimization_level=1)
+        job = SamplerV2(mode=bk).run([qc], shots=shots)
+        jid = job.job_id()
+        Z.receipt("AGENTOS_hw_submit", "EVIDENCE-D-SUBMITTED", source="zephyrium agent os bridge",
+                  job=jid, backend=backend, shots=shots, pre_hash=pre_hash,
+                  maturity="EXPERIMENTAL", zyql_decision="1")
+        audit("BRIDGE", f"REAL HARDWARE job submitted | {jid} | {backend} | collection pending")
+        return jid
+
+def pipeline_hw(question, purpose, shots=400):
+    boot()
+    Leodot().heartbeat()
+    low = purpose.lower()
+    cls = next((w for w in PROHIBITED if re.search(r"\b" + w + r"\b", low)), None)
+    if cls:
+        audit("GATEKEEPER", f"PURPOSE '{cls}' PROHIBITED -> REFUSED BEFORE COMPUTE (no hardware touched)")
+        Z.receipt("AGENTOS_refusal_hw", "PORTGATE", source="bridge", purpose=purpose,
+                  verdict="REFUSED", zyql_decision="REFUSED")
+        return "REFUSED"
+    m = Modeler().model(question, shots)
+    s = Simulator().run(m)
+    cir = Circuitier().emit(m)
+    art = {"verdict": s["verdict"], "fidelity": s["fidelity"], "shots": shots, "circuit": cir}
+    v = Gatekeeper().decide(purpose, art)
+    if v == "1":
+        Bridge().submit(cir["qasm"], purpose, shots)
+    else:
+        audit("ORCHESTRATOR", "gate did not approve -> hardware NOT touched")
+    return v
+
+if __name__ == "__main__" and os.environ.get("AGENTOS_HW"):
+    print("\n=== RUN HW: honest question -> gate -> REAL hardware ===")
+    pipeline_hw("Verify GHZ-3 witness and submit to real hardware",
+                "research entanglement statistics", shots=400)
