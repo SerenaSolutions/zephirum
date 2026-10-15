@@ -1,0 +1,17 @@
+{
+  "ts_utc": "2026-10-14T23:59:36.777234+00:00",
+  "config": {
+    "experiment": "bell_state_three_backends",
+    "purpose": "recibo de hardware real (camada COMPUTE-LAST) para os katas dark_matter + periodic_table",
+    "circuit": "H(0); CX(0,1); measure([0,1],[0,1])",
+    "shots_declared": 400,
+    "backends_wanted": [
+      "ibm_fez",
+      "ibm_marrakesh",
+      "auto_terceiro"
+    ],
+    "maturity": "EXPERIMENTAL",
+    "rule": "pre-registro hashado ANTES da coleta; orcamento declarado; nenhuma alegacao alem dos recibos"
+  },
+  "sha256": "10e5f51e8bd672574f0288a6eab9c7c70a855f40bdbc92b8cb56904ed376c0f8"
+}

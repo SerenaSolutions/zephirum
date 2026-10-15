@@ -1,0 +1,49 @@
+# ZYKL DECISION KATA — curvas de rotacao e a componente escura das galaxias
+#
+# Fontes primarias:
+#  [1] F. Zwicky, Helv. Phys. Acta 6, 110 (1933) — primeira inferencia de
+#      massa nao-luminosa (aglomerado de Coma, teorema do virial).
+#  [2] V. C. Rubin e W. K. Ford Jr., Astrophys. J. 159, 379 (1970) — curvas
+#      de rotacao planas de M31.
+#  [3] Planck Collaboration, Astron. Astrophys. 641, A6 (2020) — fracoes
+#      cosmologicas de materia barionica e escura no modelo LCDM.
+#
+# Pergunta de decisao: a cinemica de uma galaxia espiral tipica e explicavel
+# apenas pela massa barionica visivel? Nenhuma particula e "vista" aqui —
+# decidimos por cota dinamica, sem fabricar fisica alem do dado.
+# Aritmetica 100% inteira (unidades escaladas), divisao exata por construcao.
+# Maturidade: EXPERIMENTAL (dados sinteticos calibrados na escala das
+# observacoes primarias [2]); a logica de decisao do portao e IMPLEMENTADA.
+
+G_INT = 4302            # G em unidades de 1e-9 kpc (km/s)^2 / M_sun
+v = 220                 # km/s, velocidade plana (escala da Via Lactea)
+MB = 60000000000        # 6e10 M_sun de massa barionica visivel interna
+
+fun m_dinamica(r, vel) {
+  # massa dinamica contida dentro de r, em M_sun (inteiro)
+  return vel * vel * r * 1000000000 / G_INT
+}
+
+MD8 = m_dinamica(8, v)
+MD16 = m_dinamica(16, v)
+
+print "M dinamica em r=8 kpc  :", MD8, "M_sun"
+print "M dinamica em r=16 kpc :", MD16, "M_sun"
+print "ao dobrar o raio, a massa contida dobra: assinatura de halo"
+
+# rho = v^2 / (4 pi G r^2) no raio solar galactico (r=8 kpc),
+# com pi ~ 355/113; resultado escalado por 10^5 M_sun/pc^3.
+rho_scaled = v * v * 113 * 100000 / (4 * 355 * 4302 * 64)
+print "rho do halo no raio solar galactico ~", rho_scaled, "x 10^-5 M_sun/pc^3"
+print "(escala da literatura primaria: ~0.01 M_sun/pc^3)"
+
+if MD16 > 2 * MB {
+  print "VEREDITO: 1 — componente escura necessaria (dinamica >> barionica)"
+}
+
+assert MD16 * 10 > 19 * MD8, "curva plana implica M(r) ~ r (razao > 1.9)"
+assert MD16 > 2 * MB, "massa dinamica excede a barionica por fator > 2"
+assert rho_scaled > 500, "densidade local do halo na ordem de 0.01 M_sun/pc^3"
+
+print "KATA PASS — decisao por cota dinamica; nenhuma particula foi inventada"
+print "ASK FIRST. PROVE NEXT. COMPUTE LAST."

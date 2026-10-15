@@ -1,0 +1,104 @@
+# ZYKL DECISION KATA — a tabela periodica lida pela mecanica quantica
+#
+# Fontes primarias:
+#  [1] H. G. J. Moseley, Philos. Mag. 26, 1024 (1913) — a lei que ordenou os
+#      elementos pela carga nuclear e expos os buracos na tabela de Mendeleev.
+#  [2] J. A. Bearden, "X-Ray Wavelengths", Rev. Mod. Phys. 39, 78 (1967) —
+#      valores tabulados de raios X usados como dado aqui.
+#  [3] NIST Atomic Spectra Database — configuracoes eletronicas observadas
+#      (incluindo as excecoes a regra de Madelung).
+#
+# O que este kata computa da tabela periodica (sem citar divulgacao alguma):
+#  (a) A REGRA DE AUDEBAU/Madelung (ordem n+l, desempate por n) e GERADA por
+#      loops — nao copiada — e preenche configuracoes eletronicas por Z.
+#  (b) A LEI DE MOSELEY E = (3/4)·13.6 eV·(Z−1)^2 e confrontada com valores
+#      tabulados [2] (em decimos de eV): valida dentro de 2.5%.
+#  (c) EXCECOES empiricas (Cu) — quando a regra nao decide: veredito UNKNOWN.
+# Aritmetica 100% inteira. Maturidade: IMPLEMENTADO.
+
+# ---------- (a) Madelung gerado por computacao ----------
+zs = arr(4)
+zs[0] = 19
+zs[1] = 26
+zs[2] = 29
+zs[3] = 36
+
+res_4s = arr(4)
+res_3d = arr(4)
+res_4p = arr(4)
+
+for k = 0 to 3 {
+  Z = zs[k]
+  left = Z
+  e_4s = 0
+  e_3d = 0
+  e_4p = 0
+  for s = 1 to 6 {
+    for n = 1 to 7 {
+      l = s - n
+      if l >= 0 {
+        if l < n {
+          if l <= 3 {
+            cap = 2 * (2 * l + 1)
+            put = cap
+            if left < cap { put = left }
+            if left > 0 {
+              if n == 4 {
+                if l == 0 { e_4s = e_4s + put }
+                if l == 1 { e_4p = e_4p + put }
+              }
+              if n == 3 {
+                if l == 2 { e_3d = e_3d + put }
+              }
+              left = left - put
+            }
+          }
+        }
+      }
+    }
+  }
+  res_4s[k] = e_4s
+  res_3d[k] = e_3d
+  res_4p[k] = e_4p
+  print "Z =", Z, ": 4s^", e_4s, " 3d^", e_3d, " 4p^", e_4p, "(regra de Madelung)"
+}
+
+assert res_4s[0] == 1, "K: valencia 4s^1 — familia alcalina"
+assert res_3d[0] == 0, "K: 3d vazio"
+assert res_4s[1] == 2, "Fe: Madelung da 4s^2"
+assert res_3d[1] == 6, "Fe: 3d^6 — metal de transicao"
+assert res_4s[2] == 2, "Cu: a regra PREVE 4s^2"
+assert res_3d[2] == 9, "Cu: a regra PREVE 3d^9"
+assert res_4p[3] == 6, "Kr: casca 4p^6 fechada — gas nobre"
+
+# Excecao empirica: o observado no Cu e 4s^1 3d^10 [3]. A regra sozinha NAO
+# decide este caso — veredito da casa: UNKNOWN (nao se decide no escuro).
+if res_3d[2] == 9 {
+  print "EXCECAO Cu: observado 4s^1 3d^10 (casca d cheia) — veredito UNKNOWN"
+}
+
+# ---------- (b) Lei de Moseley confrontada com dados tabulados ----------
+# Energias em DECIMOS de eV (inteiros exatos). E = (3/4)·136·(Z−1)^2.
+zm = arr(4)
+ka = arr(4)
+zm[0] = 13
+ka[0] = 14867
+zm[1] = 26
+ka[1] = 64038
+zm[2] = 29
+ka[2] = 80478
+zm[3] = 42
+ka[3] = 174794
+
+for k = 0 to 3 {
+  Z = zm[k]
+  e = 3 * 136 / 4 * (Z - 1) * (Z - 1)
+  err = (ka[k] - e) * 1000 / ka[k]
+  if err < 0 { err = -err }
+  print "Z =", Z, ": Moseley =", e, "| tabulado =", ka[k], "| desvio =", err, "(decimos de eV, desvio em milesimos)"
+  assert err < 25, "Moseley dentro de 2.5% do valor tabulado [2]"
+}
+
+print "KATA PASS — a tabela periodica lida pela quantica: Madelung GERADO,"
+print "Moseley VALIDADO contra dado primario, excecao honesta = UNKNOWN."
+print "ASK FIRST. PROVE NEXT. COMPUTE LAST."
