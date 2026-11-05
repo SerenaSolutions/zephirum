@@ -13,7 +13,7 @@
   .hud{position:fixed;left:18px;top:16px;z-index:10;pointer-events:none}
   .hud h1{font-size:15px;letter-spacing:.24em;font-weight:800;color:var(--gold)}
   .hud p{font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.08em}
-  .panel{position:fixed;right:14px;top:14px;z-index:10;width:236px;max-width:50vw;
+  .panel{position:fixed;right:14px;top:14px;z-index:10;width:210px;max-width:44vw;
     background:rgba(8,6,2,.74);border:1px solid rgba(245,196,83,.28);border-radius:14px;
     padding:13px 15px;backdrop-filter:blur(8px);font-size:12px}
   .panel .row{display:flex;justify-content:space-between;gap:8px;padding:3.5px 0;color:var(--dim)}
@@ -177,12 +177,12 @@ filigree.renderOrder = 1; world.add(filigree);
 const coreSprite = new THREE.Sprite(new THREE.SpriteMaterial({
   map: glowTexture(0xfff0c0), transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending
 }));
-coreSprite.scale.set(3.4, 3.4, 1); coreSprite.renderOrder = 2;
+coreSprite.scale.set(2.6, 2.6, 1); coreSprite.renderOrder = 2;
 world.add(coreSprite);
 const coreHot = new THREE.Sprite(new THREE.SpriteMaterial({
-  map: glowTexture(0xffffff, 1.4), transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending
+  map: glowTexture(0xffe9a8, 1.0), transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending
 }));
-coreHot.scale.set(1.4, 1.4, 1); coreHot.renderOrder = 3;
+coreHot.scale.set(0.7, 0.7, 1); coreHot.renderOrder = 3;
 world.add(coreHot);
 
 /* ---------- RAIOS + ORBES DE VIDRO ---------- */
@@ -280,8 +280,8 @@ const labels = {
 function placeLabel(key) {
   const r = RAYS[key];
   const dir = new THREE.Vector3(0, 1, 0).applyQuaternion(r.g.quaternion);
-  const p = dir.clone().multiplyScalar(3.55 + 0.85);
-  p.y += (key === 'ref' ? -0.12 : 0.12);
+  const p = dir.clone().multiplyScalar(3.55 + 0.75);
+  p.y += (key === 'ref' ? -0.55 : 0.62);
   labels[key].position.copy(p);
   world.add(labels[key]);
 }
@@ -310,6 +310,8 @@ const DATA = {
     hash: '7c1e0d9b2f4a8c6e5d3b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d' }
 };
 let current = 'constant';
+const REC = new URLSearchParams(location.search).has('rec');
+if (REC) document.querySelectorAll('.panel,.buttons,.badge,.seal,.hud').forEach(e => e.style.display = 'none');
 
 function applyState() {
   const act = DATA[current].active;
@@ -355,9 +357,10 @@ el.addEventListener('touchstart', down, { passive: true }); el.addEventListener(
 
 /* ---------- LOOP ---------- */
 const clock = new THREE.Clock();
+window.__T = null;
 function animate() {
   requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
+  const t = (window.__T !== null) ? window.__T : clock.getElapsedTime();
 
   world.rotation.y += vy; world.rotation.x += vx * 0.6;
   world.rotation.x = Math.max(-0.7, Math.min(0.7, world.rotation.x));
@@ -378,6 +381,20 @@ function animate() {
   rings.forEach(rg => { rg.rotation.z += rg.userData.spin; });
   dust.rotation.y = t * 0.03;
 
+
+  if (REC && window.__T !== null) {
+    const T = window.__T;                       // 0..30
+    // atos: 0-12 constante (veredito 0) | 12-14 transicao | 14-27 balanceado (REFUSED) | 27-30 fecha
+    const want = (T >= 13 && T < 27.5) ? 'balanced' : 'constant';
+    if (want !== current) render(want);
+    // camera: orbita lenta + aproximacao suave
+    const ang = T / 30 * Math.PI * 2 * 0.75;
+    const dist = 12.5 - 2.4 * Math.sin(T / 30 * Math.PI);
+    camera.position.set(Math.sin(ang) * dist, 0.9 + Math.sin(T * 0.4) * 0.5, Math.cos(ang) * dist);
+    camera.lookAt(0, 0, 0);
+    world.rotation.y = T * 0.12;
+    world.rotation.x = Math.sin(T * 0.25) * 0.12;
+  }
   renderer.render(scene, camera);
 }
 render('constant');
