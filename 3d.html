@@ -43,12 +43,6 @@
 </head>
 <body>
 <div id="scene"></div>
-<div id="dbg" style="position:fixed;left:8px;top:64px;z-index:99;font:11px monospace;color:#f66;max-width:70vw;white-space:pre-wrap"></div>
-<script>
-window.__errs = [];
-window.addEventListener('error', function(e){ window.__errs.push(e.message + ' @ ' + (e.filename||'') + ':' + e.lineno); document.getElementById('dbg').textContent = 'ERRO: ' + window.__errs.join(' | '); });
-window.addEventListener('unhandledrejection', function(e){ window.__errs.push('reject: ' + e.reason); document.getElementById('dbg').textContent = 'ERRO: ' + window.__errs.join(' | '); });
-</script>
 
 <div class="hud">
   <h1>ZY<span>Q</span>L · DECISION SPHERE</h1>
@@ -110,7 +104,7 @@ const fill = new THREE.PointLight(0x4466ff, 30, 30); fill.position.set(-6, -3, -
 const R = 2.0;
 const sphereGeo = new THREE.SphereGeometry(R, 48, 32);
 const sphereMat = new THREE.MeshPhongMaterial({
-  color: 0x0d2550, emissive: 0x061834, transparent: true, opacity: 0.5,
+  color: 0x103060, emissive: 0x0a2148, transparent: true, opacity: 0.55,
   shininess: 80, side: THREE.DoubleSide
 });
 scene.add(new THREE.Mesh(sphereGeo, sphereMat));
@@ -184,8 +178,8 @@ function labelSprite(text, color, y) {
   scene.add(sp);
   return sp;
 }
-const labTop = labelSprite('0 · FORBIDDEN', '#22D3EE', R + 0.32);
-const labBot = labelSprite('REFUSED', '#FBBF24', -R - 0.32);
+const labTop = labelSprite('0 · FORBIDDEN', '#22D3EE', R + 0.34);
+const labBot = labelSprite('REFUSED', '#FBBF24', -R - 0.30);
 labelSprite('1 · PERMITTED', '#6EE7A8', 0).position.set(R + 0.95, 0, 0);
 
 /* ================= 5. PARTÍCULAS (circuito/estrelas) ================= */
@@ -265,20 +259,7 @@ function animate() {
   camera.position.y = 1.1 + Math.sin(t * 0.21) * 0.22;
   camera.lookAt(0, 0, 0);
 
-  try { renderer.render(scene, camera); }
-  catch (e) {
-    if (!window.__diag) {
-      window.__diag = true;
-      const bad = [];
-      scene.traverse(o => {
-        if (o.material) {
-          const m = o.material;
-          bad.push(o.type + ':' + m.type + (m.emissive ? ' [TEM emissive]' : '') + ' color=' + (m.color ? m.color.getHexString() : '-'));
-        }
-      });
-      document.getElementById('dbg').textContent = 'DIAG: ' + e.message + ' :: ' + bad.join(' | ');
-    }
-  }
+  renderer.render(scene, camera);
 }
 render(DATA.constant, 'constant');
 animate();
