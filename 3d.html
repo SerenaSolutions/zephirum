@@ -148,12 +148,6 @@ const glass = new THREE.Mesh(
 glass.renderOrder = 5;
 world.add(glass);
 
-// película interna (dá o tom esverdeado/dourado do vidro)
-const inner = new THREE.Mesh(
-  new THREE.SphereGeometry(R * 0.985, 64, 48),
-  new THREE.MeshBasicMaterial({ color: 0x1a2a14, transparent: true, opacity: 0.06, side: THREE.BackSide })
-);
-world.add(inner);
 
 /* ---------- campo de fios internos (filigrana dourada) ---------- */
 const filigree = new THREE.Group();
@@ -171,22 +165,22 @@ for (let k = 0; k < 70; k++) {
   const g = new THREE.BufferGeometry().setFromPoints(pts);
   const l = new THREE.Line(g, new THREE.LineBasicMaterial({
     color: k % 3 === 0 ? GREEN : (k % 3 === 1 ? GOLD : RED), transparent: true,
-    opacity: 0.45 + Math.random() * 0.4, blending: THREE.AdditiveBlending, depthWrite: false
+    opacity: 0.55 + Math.random() * 0.4, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false
   }));
   l.rotation.set(Math.random() * 3, Math.random() * 3, Math.random() * 3);
-  l.scale.setScalar(0.55 + Math.random() * 0.45);
+  l.scale.setScalar(0.5 + Math.random() * 0.4);
   filigree.add(l);
 }
 filigree.renderOrder = 1; world.add(filigree);
 
 /* ---------- NÚCLEO DOURADO ---------- */
 const coreSprite = new THREE.Sprite(new THREE.SpriteMaterial({
-  map: glowTexture(0xfff0c0), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
+  map: glowTexture(0xfff0c0), transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending
 }));
 coreSprite.scale.set(3.4, 3.4, 1); coreSprite.renderOrder = 2;
 world.add(coreSprite);
 const coreHot = new THREE.Sprite(new THREE.SpriteMaterial({
-  map: glowTexture(0xffffff, 1.4), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
+  map: glowTexture(0xffffff, 1.4), transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending
 }));
 coreHot.scale.set(1.4, 1.4, 1); coreHot.renderOrder = 3;
 world.add(coreHot);
@@ -206,12 +200,12 @@ function ray(hex, dir, len) {
   // feixe: cilindro fino + halo largo
   const beam = new THREE.Mesh(
     new THREE.CylinderGeometry(0.012, 0.03, len, 10, 1, true),
-    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false })
+    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false })
   );
   beam.position.y = len / 2;
   const beamGlow = new THREE.Mesh(
     new THREE.CylinderGeometry(0.05, 0.12, len, 12, 1, true),
-    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false })
+    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false })
   );
   beamGlow.position.y = len / 2;
 
