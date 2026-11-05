@@ -163,8 +163,6 @@ function setVector(v, theta, phi, len = R * 0.96) {
   v.group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
   v.shaft.scale.y = len;
   v.tip.position.set(0, len + 0.09, 0);
-  // halo
-  v.tip.material.emissive = new THREE.Color(v.color);
 }
 
 const vecConst = makeVector(CYAN);    // oráculo constante → polo do veredito 0
