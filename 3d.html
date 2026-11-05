@@ -43,6 +43,12 @@
 </head>
 <body>
 <div id="scene"></div>
+<div id="dbg" style="position:fixed;left:8px;top:64px;z-index:99;font:11px monospace;color:#f66;max-width:70vw;white-space:pre-wrap"></div>
+<script>
+window.__errs = [];
+window.addEventListener('error', function(e){ window.__errs.push(e.message + ' @ ' + (e.filename||'') + ':' + e.lineno); document.getElementById('dbg').textContent = 'ERRO: ' + window.__errs.join(' | '); });
+window.addEventListener('unhandledrejection', function(e){ window.__errs.push('reject: ' + e.reason); document.getElementById('dbg').textContent = 'ERRO: ' + window.__errs.join(' | '); });
+</script>
 
 <div class="hud">
   <h1>ZY<span>Q</span>L · DECISION SPHERE</h1>
