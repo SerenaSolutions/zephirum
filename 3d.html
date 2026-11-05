@@ -140,13 +140,12 @@ const R = 2.1;
 const glass = new THREE.Mesh(
   new THREE.SphereGeometry(R, 96, 64),
   new THREE.MeshPhysicalMaterial({
-    color: 0xffffff, metalness: 0, roughness: 0.04,
-    transmission: 1.0, thickness: 0.5, ior: 1.3,
-    transparent: true, opacity: 1,
-    clearcoat: 1, clearcoatRoughness: 0.03,
-    envMapIntensity: 1.6, attenuationColor: new THREE.Color(0xfff2d0), attenuationDistance: 30
+    color: 0xfff6e0, metalness: 0, roughness: 0.03,
+    transparent: true, opacity: 0.16, depthWrite: false,
+    clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 2.4, side: THREE.FrontSide
   })
 );
+glass.renderOrder = 5;
 world.add(glass);
 
 // película interna (dá o tom esverdeado/dourado do vidro)
@@ -178,27 +177,25 @@ for (let k = 0; k < 70; k++) {
   l.scale.setScalar(0.55 + Math.random() * 0.45);
   filigree.add(l);
 }
-world.add(filigree);
+filigree.renderOrder = 1; world.add(filigree);
 
 /* ---------- NÚCLEO DOURADO ---------- */
 const coreSprite = new THREE.Sprite(new THREE.SpriteMaterial({
   map: glowTexture(0xfff0c0), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
 }));
-coreSprite.scale.set(3.2, 3.2, 1);
+coreSprite.scale.set(3.4, 3.4, 1); coreSprite.renderOrder = 2;
 world.add(coreSprite);
 const coreHot = new THREE.Sprite(new THREE.SpriteMaterial({
   map: glowTexture(0xffffff, 1.4), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
 }));
-coreHot.scale.set(1.2, 1.2, 1);
+coreHot.scale.set(1.4, 1.4, 1); coreHot.renderOrder = 3;
 world.add(coreHot);
 
 /* ---------- RAIOS + ORBES DE VIDRO ---------- */
 function orbGlass(color) {
   return new THREE.MeshPhysicalMaterial({
-    color, metalness: 0, roughness: 0.05, transmission: 0.85, thickness: 0.6, ior: 1.5,
-    transparent: true, clearcoat: 1, envMapIntensity: 2.0,
-    emissive: color, emissiveIntensity: 0.35,
-    attenuationColor: new THREE.Color(color), attenuationDistance: 0.5
+    color, metalness: 0, roughness: 0.05, transparent: true, opacity: 0.88, clearcoat: 1, envMapIntensity: 2.0,
+    emissive: color, emissiveIntensity: 0.35
   });
 }
 function ray(hex, dir, len) {
