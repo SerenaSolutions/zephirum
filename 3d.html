@@ -265,7 +265,20 @@ function animate() {
   camera.position.y = 1.1 + Math.sin(t * 0.21) * 0.22;
   camera.lookAt(0, 0, 0);
 
-  renderer.render(scene, camera);
+  try { renderer.render(scene, camera); }
+  catch (e) {
+    if (!window.__diag) {
+      window.__diag = true;
+      const bad = [];
+      scene.traverse(o => {
+        if (o.material) {
+          const m = o.material;
+          bad.push(o.type + ':' + m.type + (m.emissive ? ' [TEM emissive]' : '') + ' color=' + (m.color ? m.color.getHexString() : '-'));
+        }
+      });
+      document.getElementById('dbg').textContent = 'DIAG: ' + e.message + ' :: ' + bad.join(' | ');
+    }
+  }
 }
 render(DATA.constant, 'constant');
 animate();
