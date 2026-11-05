@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ZYQL · Esfera de Decisão 3D — ZEPHIRUM</title>
+<style>
+  :root{--navy:#0A1A3C;--cyan:#22D3EE;--ink:#E8F1FF;--dim:#8FA3C4;--green:#6EE7A8;--amber:#FBBF24}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:var(--navy);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  #scene{position:fixed;inset:0}
+  .hud{position:fixed;left:16px;top:14px;z-index:10;pointer-events:none}
+  .hud h1{font-size:15px;letter-spacing:.18em;font-weight:800}
+  .hud h1 span{color:var(--cyan)}
+  .hud p{font-size:11px;color:var(--dim);margin-top:2px;letter-spacing:.06em}
+  .panel{position:fixed;right:14px;top:14px;z-index:10;width:250px;max-width:52vw;
+    background:rgba(6,15,36,.82);border:1px solid rgba(34,211,238,.25);border-radius:12px;
+    padding:12px 14px;backdrop-filter:blur(6px);font-size:12px}
+  .panel .row{display:flex;justify-content:space-between;gap:8px;padding:3px 0;color:var(--dim)}
+  .panel .row b{color:var(--ink);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+  .verdict{font-size:20px;font-weight:800;letter-spacing:.06em;margin:6px 0 4px;text-align:center;
+    padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.12)}
+  .v1{color:var(--green);border-color:rgba(110,231,168,.45)}
+  .v0{color:var(--cyan);border-color:rgba(34,211,238,.45)}
+  .vr{color:var(--amber);border-color:rgba(251,191,36,.5)}
+  .buttons{position:fixed;left:0;right:0;bottom:56px;z-index:10;display:flex;gap:10px;
+    justify-content:center;flex-wrap:wrap;padding:0 12px}
+  button{background:rgba(6,15,36,.85);color:var(--ink);border:1px solid rgba(34,211,238,.35);
+    border-radius:999px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  button:hover{border-color:var(--cyan);color:var(--cyan)}
+  button.on{background:rgba(34,211,238,.16);border-color:var(--cyan);color:var(--cyan)}
+  .seal{position:fixed;left:0;right:0;bottom:0;z-index:10;
+    background:rgba(4,10,26,.92);border-top:1px solid rgba(34,211,238,.2);
+    padding:8px 14px;font-family:ui-monospace,Consolas,monospace;font-size:10px;color:var(--dim);
+    overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .seal b{color:var(--cyan)}
+  .badge{position:fixed;left:16px;bottom:56px;z-index:10;font-size:10px;color:var(--dim);
+    max-width:240px;line-height:1.45}
+  .badge b{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+
+<div class="hud">
+  <h1>ZY<span>Q</span>L · DECISION SPHERE</h1>
+  <p>ZEPHIRUM v2.5.6 — trivalent verdicts 1 / 0 / REFUSED</p>
+</div>
+
+<div class="panel">
+  <div id="verdictBox" class="verdict v0">0</div>
+  <div class="row"><span>p(000)</span><b id="p0">1.0000</b></div>
+  <div class="row"><span>erro (Hoeffding)</span><b id="err">≤ 1.97e-10</b></div>
+  <div class="row"><span>tempo</span><b id="ms">1.097 ms</b></div>
+  <div class="row"><span>qubits</span><b>3</b></div>
+  <div class="row"><span>shots</span><b>512</b></div>
+  <div class="row"><span>seed</span><b>1701</b></div>
+  <div class="row"><span>serviço</span><b id="reason">&#8212;</b></div>
+</div>
+
+<div class="buttons">
+  <button id="btnConst" class="on">oráculo constante</button>
+  <button id="btnBal">oráculo balanceado</button>
+</div>
+
+<div class="badge">
+  <b>Visual 3D (simulação declarada).</b><br>
+  Hardware real · IBM Heron ibm_fez · job db6ded84qg6s73c4jvug · p(000) medido = 0.9844
+</div>
+
+<div class="seal">
+  Z-QEA receipt · <b>SHA3-256</b> <span id="sealHash">a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a</span>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* ================= 1. BASE 3D ================= */
+const NAVY = 0x0A1A3C, CYAN = 0x22D3EE, GREEN = 0x6EE7A8, AMBER = 0xFBBF24, DIM = 0x8FA3C4;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('scene').appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(NAVY, 0.055);
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 1.1, 6.4);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x88bbff, 0.55));
+const key = new THREE.PointLight(CYAN, 60, 30); key.position.set(4, 6, 6); scene.add(key);
+const fill = new THREE.PointLight(0x4466ff, 30, 30); fill.position.set(-6, -3, -4); scene.add(fill);
+
+/* ================= 2. ESFERA DE DECISÃO ================= */
+const R = 2.0;
+const sphereGeo = new THREE.SphereGeometry(R, 48, 32);
+const sphereMat = new THREE.MeshPhongMaterial({
+  color: 0x0d2550, emissive: 0x061834, transparent: true, opacity: 0.5,
+  shininess: 80, side: THREE.DoubleSide
+});
+scene.add(new THREE.Mesh(sphereGeo, sphereMat));
+
+// wireframe
+const wire = new THREE.LineSegments(
+  new THREE.WireframeGeometry(new THREE.SphereGeometry(R * 1.001, 24, 16)),
+  new THREE.LineBasicMaterial({ color: CYAN, transparent: true, opacity: 0.09 })
+);
+scene.add(wire);
+
+// equador + eixos
+function ring(color, opacity, radius, rotX = Math.PI / 2) {
+  const pts = [];
+  for (let i = 0; i <= 128; i++) {
+    const a = (i / 128) * Math.PI * 2;
+    pts.push(new THREE.Vector3(Math.cos(a) * radius, Math.sin(a) * radius, 0));
+  }
+  const g = new THREE.BufferGeometry().setFromPoints(pts);
+  const l = new THREE.Line(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity }));
+  l.rotation.x = rotX;
+  return l;
+}
+scene.add(ring(CYAN, 0.5, R));
+scene.add(ring(0x335577, 0.25, R, 0));
+scene.add(ring(0x335577, 0.25, R, 0));
+
+/* ================= 3. VETORES DE ESTADO ================= */
+function makeVector(color) {
+  const g = new THREE.Group();
+  const shaft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.018, 0.018, 1, 8),
+    new THREE.MeshBasicMaterial({ color })
+  );
+  shaft.geometry.translate(0, 0.5, 0);
+  const tip = new THREE.Mesh(
+    new THREE.ConeGeometry(0.07, 0.18, 12),
+    new THREE.MeshBasicMaterial({ color })
+  );
+  g.add(shaft); g.add(tip);
+  scene.add(g);
+  return { group: g, shaft, tip, color };
+}
+function setVector(v, theta, phi, len = R * 0.96) {
+  const dir = new THREE.Vector3(
+    Math.sin(theta) * Math.cos(phi),
+    Math.cos(theta),
+    Math.sin(theta) * Math.sin(phi)
+  );
+  v.group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+  v.shaft.scale.y = len;
+  v.tip.position.set(0, len + 0.09, 0);
+  // halo
+  v.tip.material.emissive = new THREE.Color(v.color);
+}
+
+const vecConst = makeVector(CYAN);    // oráculo constante → polo do veredito 0
+const vecBal   = makeVector(AMBER);   // oráculo balanceado → polo REFUSED
+
+/* ================= 4. CANAIS (rótulos 3D) ================= */
+function labelSprite(text, color, y) {
+  const cv = document.createElement('canvas');
+  cv.width = 512; cv.height = 128;
+  const ctx = cv.getContext('2d');
+  ctx.font = 'bold 58px ui-monospace, monospace';
+  ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.shadowColor = color; ctx.shadowBlur = 24;
+  ctx.fillText(text, 256, 64);
+  const tex = new THREE.CanvasTexture(cv);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+  sp.scale.set(1.7, 0.42, 1);
+  sp.position.set(0, y, 0);
+  scene.add(sp);
+  return sp;
+}
+const labTop = labelSprite('0 · FORBIDDEN', '#22D3EE', R + 0.32);
+const labBot = labelSprite('REFUSED', '#FBBF24', -R - 0.32);
+labelSprite('1 · PERMITTED', '#6EE7A8', 0).position.set(R + 0.95, 0, 0);
+
+/* ================= 5. PARTÍCULAS (circuito/estrelas) ================= */
+const N = 420, positions = new Float32Array(N * 3);
+for (let i = 0; i < N; i++) {
+  const r = 3 + Math.random() * 5.5;
+  const th = Math.random() * Math.PI, ph = Math.random() * Math.PI * 2;
+  positions[i * 3] = r * Math.sin(th) * Math.cos(ph);
+  positions[i * 3 + 1] = r * Math.cos(th);
+  positions[i * 3 + 2] = r * Math.sin(th) * Math.sin(ph);
+}
+const pGeo = new THREE.BufferGeometry();
+pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const stars = new THREE.Points(pGeo, new THREE.PointsMaterial({
+  color: CYAN, size: 0.028, transparent: true, opacity: 0.55
+}));
+scene.add(stars);
+
+/* ================= 6. ESTADO + INTERAÇÃO ================= */
+const DATA = {
+  constant: { p0: 1.0000, verdict: '0', err: '≤ 1.97e-10', ms: '1.097 ms', reason: '—',
+              theta: 0.055, cls: 'v0', hash: 'a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a' },
+  balanced: { p0: 0.0000, verdict: 'REFUSED', err: '≤ 1.97e-10', ms: '1.108 ms', reason: 'BALANCED_ORACLE',
+              theta: Math.PI - 0.055, cls: 'vr', hash: '7c1e0d9b2f4a8c6e5d3b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d' }
+};
+let current = 'constant';
+let targetTheta = DATA.constant.theta;
+
+function render(data, key) {
+  current = key;
+  targetTheta = data.theta;
+  const box = document.getElementById('verdictBox');
+  box.textContent = data.verdict;
+  box.className = 'verdict ' + data.cls;
+  document.getElementById('p0').textContent = data.p0.toFixed(4);
+  document.getElementById('err').textContent = data.err;
+  document.getElementById('ms').textContent = data.ms;
+  document.getElementById('reason').textContent = data.reason;
+  document.getElementById('sealHash').textContent = data.hash;
+  const on = key === 'constant' ? vecConst : vecBal;
+  const off = key === 'constant' ? vecBal : vecConst;
+  on.shaft.material.color.setHex(key === 'constant' ? CYAN : AMBER);
+  on.tip.material.color.setHex(key === 'constant' ? CYAN : AMBER);
+  off.shaft.material.color.setHex(0x2a3f66);
+  off.tip.material.color.setHex(0x2a3f66);
+  document.getElementById('btnConst').classList.toggle('on', key === 'constant');
+  document.getElementById('btnBal').classList.toggle('on', key === 'balanced');
+}
+
+document.getElementById('btnConst').onclick = () => render(DATA.constant, 'constant');
+document.getElementById('btnBal').onclick = () => render(DATA.balanced, 'balanced');
+
+/* ================= 7. ANIMAÇÃO ================= */
+let t = 0, vecTheta = DATA.constant.theta;
+function animate() {
+  requestAnimationFrame(animate);
+  t += 0.004;
+  // interpolação suave do vetor ativo
+  vecTheta += (targetTheta - vecTheta) * 0.08;
+
+  // esfera gira lentamente
+  wire.rotation.y += 0.0016;
+  stars.rotation.y += 0.0004;
+
+  // vetor constante: polo superior (veredito 0); quando ativo, pulsa
+  const pulse = 0.985 + Math.sin(t * 2.4) * 0.012;
+  if (current === 'constant') {
+    setVector(vecConst, vecTheta, 0.6, R * pulse);
+    setVector(vecBal, Math.PI - 0.10, 2.2, R * 0.55);
+  } else {
+    setVector(vecConst, 0.10, 0.6, R * 0.55);
+    setVector(vecBal, vecTheta, 0.6, R * pulse);
+  }
+
+  // câmera respira
+  camera.position.x = Math.sin(t * 0.32) * 0.55;
+  camera.position.y = 1.1 + Math.sin(t * 0.21) * 0.22;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+render(DATA.constant, 'constant');
+animate();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>
