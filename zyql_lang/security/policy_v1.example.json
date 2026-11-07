@@ -1,0 +1,16 @@
+{
+  "policy_version": "P1-2026-11",
+  "default_effect": "deny",
+  "valid_until": "2027-12-31T23:59:59Z",
+  "limits": { "max_seconds": 30, "max_memory_mb": 256 },
+  "grants": [
+    {
+      "grant_id": "G-EXEMPLO-001",
+      "program_sha256": "SUBSTITUA-PELO-HASH-DO-SEU-PROGRAMA",
+      "capabilities": ["compute", "receipt_write"],
+      "max_seconds": 10,
+      "expires_at": "2027-06-30T00:00:00Z",
+      "revoked": false
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+ "marco": "S2",
+ "nome": "POLICY GATE — NEGACAO POR PADRAO",
+ "kernel": "ZEPHYRUM 1.12",
+ "casos": 12,
+ "passes": 12,
+ "falhas": 0,
+ "resultado": {
+  "C01 autorizado com recibo previo e posterior": {
+   "pass": true,
+   "detail": ""
+  },
+  "C02 programa fora da politica recusado sem executar": {
+   "pass": true,
+   "detail": ""
+  },
+  "C03 capacidade nao concedida recusada": {
+   "pass": true,
+   "detail": ""
+  },
+  "C04 autorizacao expirada recusada": {
+   "pass": true,
+   "detail": ""
+  },
+  "C05 autorizacao revogada recusada": {
+   "pass": true,
+   "detail": ""
+  },
+  "C06 replay bloqueado": {
+   "pass": true,
+   "detail": ""
+  },
+  "C07 cadeia integra e sequencia monotona": {
+   "pass": true,
+   "detail": "3 eventos"
+  },
+  "C08 pedido acima do limite recusado": {
+   "pass": true,
+   "detail": ""
+  },
+  "C09 interrupcao por tempo e' ERROR (nao recusa)": {
+   "pass": true,
+   "detail": ""
+  },
+  "C10 adulteracao detectada pela cadeia": {
+   "pass": true,
+   "detail": "hash adulterado"
+  },
+  "C11 recusa registrada com recibo e estado NOT_EXECUTED": {
+   "pass": true,
+   "detail": ""
+  },
+  "C12 REFUSED != ERROR e != 0": {
+   "pass": true,
+   "detail": ""
+  }
+ },
+ "escopo_honesto": {
+  "enforcement": "autorizacao e recusa antes da execucao: IMPLEMENTADO",
+  "anti_replay": "execution_id + sequencia monotona: IMPLEMENTADO",
+  "auditoria": "cadeia de hash verificavel: IMPLEMENTADO",
+  "assinatura": "AUTENTICIDADE por chave: ESPECIFICACAO (M4) — aqui so integridade",
+  "sandbox_de_so": "ESPECIFICACAO (S4) — o gate autoriza, nao isola"
+ },
+ "RECEIPT_HASH": "f0c5f2213da27d7156387878eb722ba2"
+}
