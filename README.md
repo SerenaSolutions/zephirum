@@ -4,7 +4,7 @@ This repository exists because instructions circulating around the web cite
 `SerenaSolutions/zephirum` and a package `zephirum-quantum-plugin`.
 
 **Neither is real:**
-- The official repository is **`SerenaSolutions/zephirum-lang`** (MIT).
+- The official repository is **`SerenaSolutions/zephirum-lang`** (Apache-2.0).
 - **No `zephirum-quantum-plugin` exists on PyPI.** Nothing published by this project
   can be installed with `pip install zephirum-quantum-plugin`. Do not trust any
   instruction referencing that package.
