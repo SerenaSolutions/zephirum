@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://serenasolutions.github.io/zephirum/receipt_v1.schema.json",
+  "title": "ZYQL Execution Receipt v1",
+  "type": "object",
+  "required": ["identity", "execution", "evidence", "authenticity"],
+  "additionalProperties": false,
+  "properties": {
+    "identity": {
+      "type": "object",
+      "required": ["receipt_version", "program_hash", "language_version", "compiler_version", "policy_version"],
+      "additionalProperties": false,
+      "properties": {
+        "receipt_version": { "const": "1" },
+        "program_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "language_version": { "type": "string" },
+        "compiler_version": { "type": "string" },
+        "policy_version": { "type": "string" }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["execution_id", "sequence", "input_commitment", "environment", "start_time", "end_time"],
+      "additionalProperties": false,
+      "properties": {
+        "execution_id": { "type": "string", "minLength": 8 },
+        "sequence": { "type": "integer", "minimum": 0 },
+        "input_commitment": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "environment": { "type": "object" },
+        "backend": { "type": ["string", "null"] },
+        "parameters": { "type": "object" },
+        "start_time": { "type": "string", "format": "date-time" },
+        "end_time": { "type": "string", "format": "date-time" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["evidence_hashes", "decision_rule", "verdict", "execution_state"],
+      "additionalProperties": false,
+      "properties": {
+        "evidence_hashes": { "type": "array", "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "minItems": 1 },
+        "decision_rule": { "type": "string", "pattern": "^[a-z0-9_-]+-v[0-9]+$" },
+        "verdict": { "enum": ["1", "0", "REFUSED", "INCONCLUSIVE", "ERROR"] },
+        "execution_state": { "enum": ["EXECUTED", "DENIED", "INTERRUPTED", "FAILED"] },
+        "uncertainty": { "type": ["object", "null"] },
+        "limitations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "authenticity": {
+      "type": "object",
+      "required": ["signer_key_id", "signature_algorithm"],
+      "additionalProperties": false,
+      "properties": {
+        "previous_receipt_hash": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+        "signer_key_id": { "type": "string" },
+        "signature_algorithm": { "type": "string" },
+        "signature": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
