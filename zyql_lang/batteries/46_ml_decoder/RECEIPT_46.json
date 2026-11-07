@@ -1,0 +1,57 @@
+{
+ "bateria": 46,
+ "nome": "DECODER DE IA AUDITADO PELA REGUA EXATA",
+ "kernel": "ZEPHYRUM 1.12",
+ "codigo": "d=3, n=9, k=1, distancia 3 exata",
+ "P_L_exato_p0.01": 0.00154717,
+ "P_L_V2_supervisionado_p0.01": 0.00176847,
+ "razao_V2_sobre_exato": 1.143,
+ "P_L_V3_imitacao_p0.01": 0.00154717,
+ "razao_V3_sobre_exato": 1.0,
+ "V3_bits_divergentes_X": 0,
+ "V3_bits_divergentes_Z": 0,
+ "pseudo_limiar_exato": 0.08278,
+ "pseudo_limiar_V2": 0.07039,
+ "pseudo_limiar_V3": 0.08278,
+ "falhas_por_peso_exato": {
+  "2": 144,
+  "3": 1576,
+  "4": 7704,
+  "5": 23424,
+  "6": 46656,
+  "7": 58152,
+  "8": 43416,
+  "9": 15536
+ },
+ "falhas_por_peso_V2": {
+  "2": 165,
+  "3": 1684,
+  "4": 8161,
+  "5": 24668,
+  "6": 49359,
+  "7": 61964,
+  "8": 46123,
+  "9": 16260
+ },
+ "falhas_por_peso_V3": {
+  "2": 144,
+  "3": 1576,
+  "4": 7704,
+  "5": 23424,
+  "6": 46656,
+  "7": 58152,
+  "8": 43416,
+  "9": 15536
+ },
+ "padroes_avaliados": 262144,
+ "aursa": {
+  "L0": "FATO: codigo construido e verificado (postos, comutacao, cobertura, distancia)",
+  "L1": "FATO: lider de coset exato por enumeracao — OTIMO por construcao sob ruido iid",
+  "L2": "EXPERIMENTAL: rede neural supervisionada padrao, nao certificavel por instancia",
+  "V3": "EXPERIMENTAL: rede neural treinada com rotulos exatos (teto alcancavel)",
+  "L3": "FATO: avaliacao exaustiva dos 262144 padroes"
+ },
+ "teoria": "o lider de coset minimiza a probabilidade de erro logico sob ruido iid; nenhum decoder pode supera-lo neste criterio. O valor de um decoder neural e VELOCIDADE em codigos grandes, nunca precisao acima do otimo",
+ "rotulo": "o neural NAO e certificado; medido exatamente contra o otimo",
+ "RECEIPT_HASH": "4fde81691bb19e73549d5cbcc071d541"
+}
