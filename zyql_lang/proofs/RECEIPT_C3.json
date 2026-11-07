@@ -1,0 +1,42 @@
+{
+ "bateria": "C3",
+ "nome": "TEOREMA DE UNIVERSALIDADE ZYQL",
+ "kernel": "ZEPHYRUM 1.12",
+ "L_A_grupo_do_kernel_n1": 16,
+ "L_A_grupo_com_S_n1": 192,
+ "L_A_leitura": "192 = 8 fases x 24 = |C1|/U(1) mod fase",
+ "L_B_grupo_simpletico_n2_kernel": 72,
+ "L_B_espaco_simpletico_completo": 720,
+ "L_B_conclusao": "o conjunto atual gera apenas 72 dos 720 elementos: subgrupo ESTRITO do Clifford",
+ "L_C_T_e_clifford": false,
+ "L_C_prova": "T X T+ = (X+Y)/sqrt2 EXATO e nao e fase x Pauli -> T nao preserva o grupo de Pauli",
+ "L_D_densidade_numerica": {
+  "10": [
+   0.39803,
+   0.93953
+  ],
+  "20": [
+   0.21495,
+   0.52307
+  ],
+  "30": [
+   0.18883,
+   0.30912
+  ],
+  "40": [
+   0.15564,
+   0.26229
+  ]
+ },
+ "teorema_1": "Nenhum circuito sobre {H,X,Y,Z,CNOT} e universal: o fecho do grupo e finito, logo unitarias fora do conjunto tem distancia minima positiva",
+ "teorema_2": "Com S adicionado chega-se ao grupo de Clifford (24 mod fase); ainda NAO universal (Gottesman-Knill 1998: simulacao classica eficiente)",
+ "teorema_3": "Com T (ou Rz(theta)) adicionado, <H,T,CNOT> e denso em SU(2^n) — Boykin-Mor-Pulver-Rowell 2000; Shi 2002; Aharonov 2003; aproximacao por Solovay-Kitaev 1997",
+ "veredito": "C3 VERDADEIRO E INFORMATIVO: a linguagem NAO e universal hoje; torna-se universal com a adicao de T/Rz ao kernel e ao compilador — mudanca especificada",
+ "aursa": {
+  "L1": "FATO: ordens de grupo enumeradas exatamente",
+  "L2": "FATO: prova algebrica exata de T nao-Clifford",
+  "L3": "NUMERICA: densidade de <H,T> (evidencia, nao prova)",
+  "L4": "INFERENCIA: teoremas citados da literatura"
+ },
+ "RECEIPT_HASH": "55121a60b950382307830cafe5a54b7f"
+}
