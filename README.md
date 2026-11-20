@@ -1,3 +1,12 @@
+> **⚠️ REPOSITÓRIO ARQUIVADO — use o canônico: [SerenaSolutions/zephirum-lang](https://github.com/SerenaSolutions/zephirum-lang)**
+>
+> Este repositório foi arquivado em 20/11/2026 para eliminar a ambiguidade de duas portas
+> para o mesmo produto. O desenvolvimento ativo, o pacote `zephirum`, o chat ZYQL e a
+> conformidade CI/CD vivem em **zephirum-lang** (Apache-2.0).
+> Motivo registrado: auditoria do ecossistema — 34 repositórios sem hierarquia.
+
+---
+
 # ⚠️ You are at the pointer — the language lives at [`zephirum-lang`](https://github.com/SerenaSolutions/zephirum-lang)
 
 This repository exists because instructions circulating around the web cite
